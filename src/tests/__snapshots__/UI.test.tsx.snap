@@ -1,0 +1,166 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Filters component renders correctly 1`] = `
+<nav
+  className="sc-fzozJi kUUeMx"
+>
+  <div
+    className="sc-fzoLsD kQakxx"
+  >
+    <div
+      className="sc-fzpans ekKcGX"
+    >
+      Read Time
+    </div>
+  </div>
+  <div
+    className="sc-fzoLsD kQakxx"
+  >
+    <div
+      className="sc-fzpans ekKcGX"
+    >
+      Interest
+    </div>
+  </div>
+  <div
+    className="sc-fzoLsD kQakxx"
+  >
+    <div
+      className="sc-fzpans ekKcGX"
+    >
+      Tags
+    </div>
+  </div>
+</nav>
+`;
+
+exports[`SaveButton component renders correctly 1`] = `
+<header
+  className="sc-AxheI eEVLgR"
+>
+  <div
+    className="sc-Axmtr eEYfct"
+    onClick={[Function]}
+  >
+    <span
+      className="sc-AxmLO kICNQr"
+    >
+      Save this page
+    </span>
+    <svg>
+      arrow_down.svg
+    </svg>
+  </div>
+</header>
+`;
+
+exports[`SavePageSettings component renders correctly 1`] = `
+<div
+  className="sc-AxgMl fTRAEK"
+>
+  <div>
+    <label
+      className="sc-AxhCb llbGyu"
+    >
+      Read Time:
+    </label>
+    <div
+      className="sc-AxjAm itEsx"
+    >
+      <div
+        className="sc-AxirZ dVgATR"
+      >
+        <input
+          className="sc-AxiKw klInzN"
+          name="time"
+          type="radio"
+        />
+        <svg>
+          low_time.svg
+        </svg>
+      </div>
+      <div
+        className="sc-AxirZ dVgATR"
+      >
+        <input
+          className="sc-AxiKw klInzN"
+          name="time"
+          type="radio"
+        />
+        <svg>
+          medium_time.svg
+        </svg>
+      </div>
+      <div
+        className="sc-AxirZ dVgATR"
+      >
+        <input
+          className="sc-AxiKw klInzN"
+          name="time"
+          type="radio"
+        />
+        <svg>
+          huge_time.svg
+        </svg>
+      </div>
+    </div>
+  </div>
+  <div>
+    <label
+      className="sc-AxhCb llbGyu"
+    >
+      Interest:
+    </label>
+    <div
+      className="sc-AxjAm itEsx"
+    >
+      <div
+        className="sc-AxirZ dVgATR"
+      >
+        <input
+          className="sc-AxiKw klInzN"
+          name="interest"
+          type="radio"
+        />
+        <svg>
+          low_interest.svg
+        </svg>
+      </div>
+      <div
+        className="sc-AxirZ dVgATR"
+      >
+        <input
+          className="sc-AxiKw klInzN"
+          name="interest"
+          type="radio"
+        />
+        <svg>
+          medium_interest.svg
+        </svg>
+      </div>
+      <div
+        className="sc-AxirZ dVgATR"
+      >
+        <input
+          className="sc-AxiKw klInzN"
+          name="interest"
+          type="radio"
+        />
+        <svg>
+          huge_interest.svg
+        </svg>
+      </div>
+    </div>
+  </div>
+  <div>
+    <label
+      className="sc-AxhCb llbGyu"
+    >
+      Tags:
+    </label>
+    <textarea
+      className="sc-AxhUy bKTPOf"
+    />
+  </div>
+</div>
+`;

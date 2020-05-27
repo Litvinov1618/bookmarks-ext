@@ -1,7 +1,7 @@
-import React from 'react';
-import { ReactComponent as LowTime } from './img/low_time.svg';
-import { ReactComponent as MediumInterest } from './img/medium_interest.svg';
-import styled from 'styled-components';
+import React from "react";
+import { ReactComponent as LowTime } from "../img/low_time.svg";
+import { ReactComponent as MediumInterest } from "../img/medium_interest.svg";
+import styled from "styled-components";
 
 const Article = styled.article`
   width: 100%;
@@ -28,7 +28,7 @@ const H1 = styled.h1`
 
 const Hr = styled.div`
   height: 1px;
-  background-color: #E95656;
+  background-color: #e95656;
 `;
 
 const Wrapper = styled.div`
@@ -47,12 +47,12 @@ const Link = styled.p`
 const Tags = styled.p`
   margin: 0px;
   font-size: 12px;
-  color: #6F6F6F;
+  color: #6f6f6f;
   width: 50%;
   white-space: pre-wrap;
 `;
 
-const Bookmark = () => {
+const Bookmark: React.FC = () => {
   return (
     <Article>
       <Section>
@@ -67,6 +67,6 @@ const Bookmark = () => {
       </Wrapper>
     </Article>
   );
-}
+};
 
 export default Bookmark;
