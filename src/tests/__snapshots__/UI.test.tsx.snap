@@ -2,31 +2,31 @@
 
 exports[`Filters component renders correctly 1`] = `
 <nav
-  className="sc-fzozJi kUUeMx"
+  className="sc-fzpans knfSsT"
 >
   <div
-    className="sc-fzoLsD kQakxx"
+    className="sc-fzplWN eFzDRM"
   >
     <div
-      className="sc-fzpans ekKcGX"
+      className="sc-fznyAO jNSMMS"
     >
       Read Time
     </div>
   </div>
   <div
-    className="sc-fzoLsD kQakxx"
+    className="sc-fzplWN eFzDRM"
   >
     <div
-      className="sc-fzpans ekKcGX"
+      className="sc-fznyAO jNSMMS"
     >
       Interest
     </div>
   </div>
   <div
-    className="sc-fzoLsD kQakxx"
+    className="sc-fzplWN eFzDRM"
   >
     <div
-      className="sc-fzpans ekKcGX"
+      className="sc-fznyAO jNSMMS"
     >
       Tags
     </div>
@@ -36,14 +36,14 @@ exports[`Filters component renders correctly 1`] = `
 
 exports[`SaveButton component renders correctly 1`] = `
 <header
-  className="sc-AxheI eEVLgR"
+  className="sc-AxmLO cWabqP"
 >
   <div
-    className="sc-Axmtr eEYfct"
+    className="sc-fzozJi BoHKt"
     onClick={[Function]}
   >
     <span
-      className="sc-AxmLO kICNQr"
+      className="sc-fzoLsD lpjFOM"
     >
       Save this page
     </span>
@@ -56,7 +56,7 @@ exports[`SaveButton component renders correctly 1`] = `
 
 exports[`SavePageSettings component renders correctly 1`] = `
 <div
-  className="sc-AxgMl fTRAEK"
+  className="sc-AxgMl etKNwt"
 >
   <div>
     <label
@@ -161,6 +161,15 @@ exports[`SavePageSettings component renders correctly 1`] = `
     <textarea
       className="sc-AxhUy bKTPOf"
     />
+  </div>
+  <div
+    className="sc-AxheI ByOdM"
+  >
+    <button
+      className="sc-Axmtr jQdBXG"
+    >
+      Send
+    </button>
   </div>
 </div>
 `;
