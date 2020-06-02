@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { ReactComponent as ArrowDown } from "../img/arrow_down.svg";
 import SavePageSettings from "./SavePageSettings";
-import getUrl from "./ChromeAPI/getUrl";
 
 const Wrapper = styled.header`
   width: 300px;
@@ -36,12 +35,21 @@ const Span = styled.span`
   line-height: 28px;
 `;
 
+declare var chrome: any;
+
 const SaveButton: React.FC = () => {
   const [AddContentStatus, setAddContentStatus] = useState(false);
+  // const [pageUrl, setPageUrl] = useState("");
   const savePage = () => {
     if (AddContentStatus === false) {
       setAddContentStatus(true);
-      getUrl();
+      // chrome.tabs.query(
+      //   { active: true, lastFocusedWindow: true },
+      //   (tabs: any) => {
+      //     let url = tabs[0].url;
+      //     setPageUrl(url);
+      //   }
+      // );
     } else setAddContentStatus(false);
   };
   return (
@@ -50,7 +58,11 @@ const SaveButton: React.FC = () => {
         <Span>Save this page</Span>
         <ArrowDown />
       </MainContent>
-      {AddContentStatus && <SavePageSettings />}
+      {AddContentStatus && (
+        <SavePageSettings
+        // url={pageUrl}
+        />
+      )}
     </Wrapper>
   );
 };

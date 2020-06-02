@@ -37,53 +37,83 @@ const Wrapper = styled.div`
   justify-content: space-between;
   flex-direction: column;
 
-  height: 170px;
+  height: 230px;
   padding: 0 14px;
 `;
 
-const SavePageSettings = () => {
-  return (
-    <Wrapper>
-      <div>
-        <Label>Read Time:</Label>
-        <InputList>
-          <InputItem>
-            <Input type="radio" name="time" />
-            <TimeIcon status="low" />
-          </InputItem>
-          <InputItem>
-            <Input type="radio" name="time" />
-            <TimeIcon status="medium" />
-          </InputItem>
-          <InputItem>
-            <Input type="radio" name="time" />
-            <TimeIcon status="huge" />
-          </InputItem>
-        </InputList>
-      </div>
-      <div>
-        <Label>Interest:</Label>
-        <InputList>
-          <InputItem>
-            <Input type="radio" name="interest" />
-            <InterestIcon status="low" />
-          </InputItem>
-          <InputItem>
-            <Input type="radio" name="interest" />
-            <InterestIcon status="medium" />
-          </InputItem>
-          <InputItem>
-            <Input type="radio" name="interest" />
-            <InterestIcon status="huge" />
-          </InputItem>
-        </InputList>
-      </div>
-      <div>
-        <Label>Tags:</Label>
-        <TextArea />
-      </div>
-    </Wrapper>
-  );
-};
+const ButtonWrapper = styled.div`
+  text-align: center;
+`;
+
+const Button = styled.button`
+  width: 90px;
+  height: 29px;
+  margin-bottom: 10px;
+
+  border: 1px solid #e95656;
+  box-sizing: border-box;
+  border-radius: 5px;
+  background-color: white;
+  font-size: 18px;
+
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+interface urlProp {
+  url: string;
+}
+
+const SavePageSettings = () =>
+  // prop: urlProp
+  {
+    return (
+      <Wrapper>
+        <div>
+          {/* <h2>URL: {prop.url}</h2> */}
+          <Label>Read Time:</Label>
+          <InputList>
+            <InputItem>
+              <Input type="radio" name="time" />
+              <TimeIcon status="low" />
+            </InputItem>
+            <InputItem>
+              <Input type="radio" name="time" />
+              <TimeIcon status="medium" />
+            </InputItem>
+            <InputItem>
+              <Input type="radio" name="time" />
+              <TimeIcon status="huge" />
+            </InputItem>
+          </InputList>
+        </div>
+        <div>
+          <Label>Interest:</Label>
+          <InputList>
+            <InputItem>
+              <Input type="radio" name="interest" />
+              <InterestIcon status="low" />
+            </InputItem>
+            <InputItem>
+              <Input type="radio" name="interest" />
+              <InterestIcon status="medium" />
+            </InputItem>
+            <InputItem>
+              <Input type="radio" name="interest" />
+              <InterestIcon status="huge" />
+            </InputItem>
+          </InputList>
+        </div>
+        <div>
+          <Label>Tags:</Label>
+          <TextArea />
+        </div>
+        <ButtonWrapper>
+          <Button>Send</Button>
+        </ButtonWrapper>
+      </Wrapper>
+    );
+  };
 
 export default SavePageSettings;

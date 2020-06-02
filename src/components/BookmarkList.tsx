@@ -7,12 +7,9 @@ const Wrapper = styled.main`
   min-height: 224px;
 `;
 
-const Bookmarks: React.FC = () => {
+const Bookmarks = () => {
   return (
     <Wrapper>
-      <BookmarkItem></BookmarkItem>
-      <BookmarkItem></BookmarkItem>
-      <BookmarkItem></BookmarkItem>
       <BookmarkItem></BookmarkItem>
     </Wrapper>
   );
