@@ -37,19 +37,22 @@ const Span = styled.span`
 
 declare var chrome: any;
 
-const SaveButton: React.FC = () => {
+interface Tav {}
+
+const SaveButton = () => {
   const [AddContentStatus, setAddContentStatus] = useState(false);
-  // const [pageUrl, setPageUrl] = useState("");
+  const [pageUrl, setPageUrl] = useState("");
+  const [pageTitle, setPageTitle] = useState("");
   const savePage = () => {
     if (AddContentStatus === false) {
       setAddContentStatus(true);
-      // chrome.tabs.query(
-      //   { active: true, lastFocusedWindow: true },
-      //   (tabs: any) => {
-      //     let url = tabs[0].url;
-      //     setPageUrl(url);
-      //   }
-      // );
+      chrome.tabs.query(
+        { active: true, lastFocusedWindow: true },
+        (tabs: Array<any>) => {
+          setPageUrl(tabs[0].url);
+          setPageTitle(tabs[0].title);
+        }
+      );
     } else setAddContentStatus(false);
   };
   return (
@@ -58,11 +61,7 @@ const SaveButton: React.FC = () => {
         <Span>Save this page</Span>
         <ArrowDown />
       </MainContent>
-      {AddContentStatus && (
-        <SavePageSettings
-        // url={pageUrl}
-        />
-      )}
+      {AddContentStatus && <SavePageSettings url={pageUrl} title={pageTitle} />}
     </Wrapper>
   );
 };

@@ -56,9 +56,15 @@ exports[`SaveButton component renders correctly 1`] = `
 
 exports[`SavePageSettings component renders correctly 1`] = `
 <div
-  className="sc-AxgMl etKNwt"
+  className="sc-AxgMl gnKkkU"
 >
   <div>
+    <h2>
+      URL: 
+    </h2>
+    <h2>
+      Title: 
+    </h2>
     <label
       className="sc-AxhCb llbGyu"
     >

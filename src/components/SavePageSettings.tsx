@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, ChangeEvent } from "react";
 import styled from "styled-components";
 import TimeIcon from "./TimeIcon";
 import InterestIcon from "./InterestIcon";
@@ -37,7 +37,7 @@ const Wrapper = styled.div`
   justify-content: space-between;
   flex-direction: column;
 
-  height: 230px;
+  min-height: 290px;
   padding: 0 14px;
 `;
 
@@ -61,59 +61,107 @@ const Button = styled.button`
   }
 `;
 
-interface urlProp {
+interface pageInfo {
   url: string;
+  title: string;
 }
 
-const SavePageSettings = () =>
-  // prop: urlProp
-  {
-    return (
-      <Wrapper>
-        <div>
-          {/* <h2>URL: {prop.url}</h2> */}
-          <Label>Read Time:</Label>
-          <InputList>
-            <InputItem>
-              <Input type="radio" name="time" />
-              <TimeIcon status="low" />
-            </InputItem>
-            <InputItem>
-              <Input type="radio" name="time" />
-              <TimeIcon status="medium" />
-            </InputItem>
-            <InputItem>
-              <Input type="radio" name="time" />
-              <TimeIcon status="huge" />
-            </InputItem>
-          </InputList>
-        </div>
-        <div>
-          <Label>Interest:</Label>
-          <InputList>
-            <InputItem>
-              <Input type="radio" name="interest" />
-              <InterestIcon status="low" />
-            </InputItem>
-            <InputItem>
-              <Input type="radio" name="interest" />
-              <InterestIcon status="medium" />
-            </InputItem>
-            <InputItem>
-              <Input type="radio" name="interest" />
-              <InterestIcon status="huge" />
-            </InputItem>
-          </InputList>
-        </div>
-        <div>
-          <Label>Tags:</Label>
-          <TextArea />
-        </div>
-        <ButtonWrapper>
-          <Button>Send</Button>
-        </ButtonWrapper>
-      </Wrapper>
-    );
+const SavePageSettings = (prop: pageInfo) => {
+  const [timeStatus, setTimeStatus] = useState("");
+  const handleTimeStatusChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setTimeStatus(event.target.value);
+    console.log(event.target.value);
   };
+
+  const [interestStatus, setInterestStatus] = useState("");
+  const handleInterestStatusChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setInterestStatus(event.target.value);
+    console.log(event.target.value);
+  };
+
+  return (
+    <Wrapper>
+      <div>
+        <h2>URL: {prop.url}</h2>
+        <h2>Title: {prop.title}</h2>
+        <Label>Read Time:</Label>
+        <InputList>
+          <InputItem>
+            <Input
+              type="radio"
+              name="time"
+              value="low"
+              onChange={handleTimeStatusChange}
+              checked={timeStatus === "low"}
+            />
+            <TimeIcon status="low" />
+          </InputItem>
+          <InputItem>
+            <Input
+              type="radio"
+              name="time"
+              value="medium"
+              checked={timeStatus === "medium"}
+              onChange={handleTimeStatusChange}
+            />
+            <TimeIcon status="medium" />
+          </InputItem>
+          <InputItem>
+            <Input
+              type="radio"
+              name="time"
+              value="huge"
+              checked={timeStatus === "huge"}
+              onChange={handleTimeStatusChange}
+            />
+            <TimeIcon status="huge" />
+          </InputItem>
+        </InputList>
+      </div>
+      <div>
+        <Label>Interest:</Label>
+        <InputList>
+          <InputItem>
+            <Input
+              type="radio"
+              name="interest"
+              value="low"
+              onChange={handleInterestStatusChange}
+              checked={interestStatus === "low"}
+            />
+            <InterestIcon status="low" />
+          </InputItem>
+          <InputItem>
+            <Input
+              type="radio"
+              name="interest"
+              value="medium"
+              onChange={handleInterestStatusChange}
+              checked={interestStatus === "medium"}
+            />
+            <InterestIcon status="medium" />
+          </InputItem>
+          <InputItem>
+            <Input
+              type="radio"
+              name="interest"
+              value="huge"
+              onChange={handleInterestStatusChange}
+              checked={interestStatus === "huge"}
+            />
+            <InterestIcon status="huge" />
+          </InputItem>
+        </InputList>
+      </div>
+      <div>
+        <Label>Tags:</Label>
+        <TextArea />
+      </div>
+      <ButtonWrapper>
+        <Button>Send</Button>
+      </ButtonWrapper>
+    </Wrapper>
+  );
+};
 
 export default SavePageSettings;
