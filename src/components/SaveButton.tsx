@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { ReactComponent as ArrowDown } from "../img/arrow_down.svg";
 import SavePageSettings from "./SavePageSettings";
+import getUrl from "./ChromeAPI/getUrl";
 
 const Wrapper = styled.header`
   width: 300px;
@@ -37,13 +38,15 @@ const Span = styled.span`
 
 const SaveButton: React.FC = () => {
   const [AddContentStatus, setAddContentStatus] = useState(false);
-  const showAdditionalContent = () => {
-    if (AddContentStatus === false) setAddContentStatus(true);
-    else setAddContentStatus(false);
+  const savePage = () => {
+    if (AddContentStatus === false) {
+      setAddContentStatus(true);
+      getUrl();
+    } else setAddContentStatus(false);
   };
   return (
     <Wrapper>
-      <MainContent onClick={showAdditionalContent}>
+      <MainContent onClick={savePage}>
         <Span>Save this page</Span>
         <ArrowDown />
       </MainContent>

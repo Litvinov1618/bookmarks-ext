@@ -13,7 +13,7 @@ const Wrapper = styled.div`
   align-items: center;
 `;
 
-const App: React.FC = () => {
+const App = () => {
   return (
     <Wrapper>
       <SaveButton />
