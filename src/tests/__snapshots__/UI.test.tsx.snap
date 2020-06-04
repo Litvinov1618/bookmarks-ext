@@ -77,21 +77,27 @@ exports[`SavePageSettings component renders correctly 1`] = `
         className="sc-AxirZ dVgATR"
       >
         <input
+          checked={false}
           className="sc-AxiKw klInzN"
           name="time"
+          onChange={[Function]}
           type="radio"
+          value="small"
         />
         <svg>
-          low_time.svg
+          small_time.svg
         </svg>
       </div>
       <div
         className="sc-AxirZ dVgATR"
       >
         <input
+          checked={false}
           className="sc-AxiKw klInzN"
           name="time"
+          onChange={[Function]}
           type="radio"
+          value="medium"
         />
         <svg>
           medium_time.svg
@@ -101,12 +107,15 @@ exports[`SavePageSettings component renders correctly 1`] = `
         className="sc-AxirZ dVgATR"
       >
         <input
+          checked={false}
           className="sc-AxiKw klInzN"
           name="time"
+          onChange={[Function]}
           type="radio"
+          value="high"
         />
         <svg>
-          huge_time.svg
+          high_time.svg
         </svg>
       </div>
     </div>
@@ -124,21 +133,27 @@ exports[`SavePageSettings component renders correctly 1`] = `
         className="sc-AxirZ dVgATR"
       >
         <input
+          checked={false}
           className="sc-AxiKw klInzN"
           name="interest"
+          onChange={[Function]}
           type="radio"
+          value="small"
         />
         <svg>
-          low_interest.svg
+          small_interest.svg
         </svg>
       </div>
       <div
         className="sc-AxirZ dVgATR"
       >
         <input
+          checked={false}
           className="sc-AxiKw klInzN"
           name="interest"
+          onChange={[Function]}
           type="radio"
+          value="medium"
         />
         <svg>
           medium_interest.svg
@@ -148,12 +163,15 @@ exports[`SavePageSettings component renders correctly 1`] = `
         className="sc-AxirZ dVgATR"
       >
         <input
+          checked={false}
           className="sc-AxiKw klInzN"
           name="interest"
+          onChange={[Function]}
           type="radio"
+          value="high"
         />
         <svg>
-          huge_interest.svg
+          high_interest.svg
         </svg>
       </div>
     </div>
@@ -166,6 +184,8 @@ exports[`SavePageSettings component renders correctly 1`] = `
     </label>
     <textarea
       className="sc-AxhUy bKTPOf"
+      onChange={[Function]}
+      value=""
     />
   </div>
   <div
@@ -173,6 +193,7 @@ exports[`SavePageSettings component renders correctly 1`] = `
   >
     <button
       className="sc-Axmtr jQdBXG"
+      onClick={[Function]}
     >
       Send
     </button>

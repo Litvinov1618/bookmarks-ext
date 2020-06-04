@@ -37,15 +37,18 @@ const Span = styled.span`
 
 declare var chrome: any;
 
-interface Tav {}
+interface pageInfo {
+  url: string;
+  title: string;
+}
 
 const SaveButton = () => {
-  const [AddContentStatus, setAddContentStatus] = useState(false);
+  const [AdditionalContentStatus, setAdditionalContentStatus] = useState(false);
   const [pageUrl, setPageUrl] = useState("");
   const [pageTitle, setPageTitle] = useState("");
   const savePage = () => {
-    if (AddContentStatus === false) {
-      setAddContentStatus(true);
+    if (AdditionalContentStatus === false) {
+      setAdditionalContentStatus(true);
       chrome.tabs.query(
         { active: true, lastFocusedWindow: true },
         (tabs: Array<any>) => {
@@ -53,7 +56,7 @@ const SaveButton = () => {
           setPageTitle(tabs[0].title);
         }
       );
-    } else setAddContentStatus(false);
+    } else setAdditionalContentStatus(false);
   };
   return (
     <Wrapper>
@@ -61,7 +64,9 @@ const SaveButton = () => {
         <Span>Save this page</Span>
         <ArrowDown />
       </MainContent>
-      {AddContentStatus && <SavePageSettings url={pageUrl} title={pageTitle} />}
+      {AdditionalContentStatus && (
+        <SavePageSettings url={pageUrl} title={pageTitle} />
+      )}
     </Wrapper>
   );
 };

@@ -1,7 +1,7 @@
 import React from "react";
-import { ReactComponent as LowInterest } from "../img/low_interest.svg";
+import { ReactComponent as SmallInterest } from "../img/small_interest.svg";
 import { ReactComponent as MediumInterest } from "../img/medium_interest.svg";
-import { ReactComponent as HugeInterest } from "../img/huge_interest.svg";
+import { ReactComponent as HighInterest } from "../img/high_interest.svg";
 
 interface interestStatusProps {
   status: string;
@@ -9,14 +9,14 @@ interface interestStatusProps {
 
 const TimeIcon = (props: interestStatusProps) => {
   switch (props.status) {
-    case "low":
-      return <LowInterest />;
+    case "small":
+      return <SmallInterest />;
     case "medium":
       return <MediumInterest />;
-    case "huge":
-      return <HugeInterest />;
+    case "high":
+      return <HighInterest />;
     default:
-      return <LowInterest />;
+      return <SmallInterest />;
   }
 };
 

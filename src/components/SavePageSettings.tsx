@@ -66,17 +66,47 @@ interface pageInfo {
   title: string;
 }
 
+declare const chrome: any;
+
 const SavePageSettings = (prop: pageInfo) => {
-  const [timeStatus, setTimeStatus] = useState("");
-  const handleTimeStatusChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setTimeStatus(event.target.value);
+  const [time, setTime] = useState("");
+  const handleTime = (event: {
+    target: { value: React.SetStateAction<string> };
+  }) => {
+    setTime(event.target.value);
     console.log(event.target.value);
   };
 
-  const [interestStatus, setInterestStatus] = useState("");
-  const handleInterestStatusChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setInterestStatus(event.target.value);
+  const [interest, setInterest] = useState("");
+  const handleInterest = (event: {
+    target: { value: React.SetStateAction<string> };
+  }) => {
+    setInterest(event.target.value);
     console.log(event.target.value);
+  };
+
+  const [tags, setTags] = useState("");
+  const handleTags = (event: {
+    target: { value: React.SetStateAction<string> };
+  }) => {
+    setTags(event.target.value);
+  };
+
+  const [savingPageInfo, setSavingPageInfo] = useState({});
+  const sendBookmark = () => {
+    setSavingPageInfo({
+      url: prop.url,
+      title: prop.title,
+      time,
+      interest,
+      tags: tags.split(",").map((str) => str.trim()),
+    });
+    chrome.storage.local.set(savingPageInfo, function () {
+      alert("Value is set to " + savingPageInfo);
+    });
+    chrome.storage.local.get(savingPageInfo, function () {
+      alert("Value currently is " + savingPageInfo);
+    });
   };
 
   return (
@@ -90,19 +120,19 @@ const SavePageSettings = (prop: pageInfo) => {
             <Input
               type="radio"
               name="time"
-              value="low"
-              onChange={handleTimeStatusChange}
-              checked={timeStatus === "low"}
+              value="small"
+              checked={time === "small"}
+              onChange={handleTime}
             />
-            <TimeIcon status="low" />
+            <TimeIcon status="small" />
           </InputItem>
           <InputItem>
             <Input
               type="radio"
               name="time"
               value="medium"
-              checked={timeStatus === "medium"}
-              onChange={handleTimeStatusChange}
+              checked={time === "medium"}
+              onChange={handleTime}
             />
             <TimeIcon status="medium" />
           </InputItem>
@@ -110,11 +140,11 @@ const SavePageSettings = (prop: pageInfo) => {
             <Input
               type="radio"
               name="time"
-              value="huge"
-              checked={timeStatus === "huge"}
-              onChange={handleTimeStatusChange}
+              value="high"
+              checked={time === "high"}
+              onChange={handleTime}
             />
-            <TimeIcon status="huge" />
+            <TimeIcon status="high" />
           </InputItem>
         </InputList>
       </div>
@@ -125,19 +155,19 @@ const SavePageSettings = (prop: pageInfo) => {
             <Input
               type="radio"
               name="interest"
-              value="low"
-              onChange={handleInterestStatusChange}
-              checked={interestStatus === "low"}
+              value="small"
+              onChange={handleInterest}
+              checked={interest === "small"}
             />
-            <InterestIcon status="low" />
+            <InterestIcon status="small" />
           </InputItem>
           <InputItem>
             <Input
               type="radio"
               name="interest"
               value="medium"
-              onChange={handleInterestStatusChange}
-              checked={interestStatus === "medium"}
+              onChange={handleInterest}
+              checked={interest === "medium"}
             />
             <InterestIcon status="medium" />
           </InputItem>
@@ -145,20 +175,20 @@ const SavePageSettings = (prop: pageInfo) => {
             <Input
               type="radio"
               name="interest"
-              value="huge"
-              onChange={handleInterestStatusChange}
-              checked={interestStatus === "huge"}
+              value="high"
+              onChange={handleInterest}
+              checked={interest === "high"}
             />
-            <InterestIcon status="huge" />
+            <InterestIcon status="high" />
           </InputItem>
         </InputList>
       </div>
       <div>
         <Label>Tags:</Label>
-        <TextArea />
+        <TextArea onChange={handleTags} value={tags} />
       </div>
       <ButtonWrapper>
-        <Button>Send</Button>
+        <Button onClick={sendBookmark}>Send</Button>
       </ButtonWrapper>
     </Wrapper>
   );

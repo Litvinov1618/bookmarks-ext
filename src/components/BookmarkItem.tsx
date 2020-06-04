@@ -1,5 +1,5 @@
 import React from "react";
-import { ReactComponent as LowTime } from "../img/low_time.svg";
+import { ReactComponent as SmallTime } from "../img/small_time.svg";
 import { ReactComponent as MediumInterest } from "../img/medium_interest.svg";
 import styled from "styled-components";
 
@@ -52,13 +52,13 @@ const Tags = styled.p`
   white-space: pre-wrap;
 `;
 
-const Bookmark: React.FC = () => {
+const Bookmark = () => {
   return (
     <Article>
       <Section>
         <H1>7 Beautiful Mosaic-Tiled Stairways in San Francisco</H1>
         <MediumInterest />
-        <LowTime />
+        <SmallTime />
       </Section>
       <Hr />
       <Wrapper>
