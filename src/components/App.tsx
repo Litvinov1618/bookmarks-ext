@@ -16,7 +16,7 @@ const Wrapper = styled.div`
 const App = () => {
   return (
     <Wrapper>
-      <SaveButton />
+      {process.env.REACT_APP_IS_EXTENSION && <SaveButton />}
       <Filters />
       <BookmarkList />
     </Wrapper>

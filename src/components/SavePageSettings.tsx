@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import TimeIcon from "./TimeIcon";
 import InterestIcon from "./InterestIcon";
