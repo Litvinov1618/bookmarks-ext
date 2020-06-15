@@ -37,11 +37,6 @@ const Span = styled.span`
 
 declare var chrome: any;
 
-interface pageInfo {
-  url: string;
-  title: string;
-}
-
 const SaveButton = () => {
   const [AdditionalContentStatus, setAdditionalContentStatus] = useState(false);
   const [pageUrl, setPageUrl] = useState("");

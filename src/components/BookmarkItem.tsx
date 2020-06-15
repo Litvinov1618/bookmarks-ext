@@ -1,7 +1,7 @@
 import React from "react";
-import { ReactComponent as SmallTime } from "../img/small_time.svg";
-import { ReactComponent as MediumInterest } from "../img/medium_interest.svg";
 import styled from "styled-components";
+import TimeIcon from "./TimeIcon";
+import InterestIcon from "./InterestIcon";
 
 const Article = styled.article`
   width: 100%;
@@ -13,6 +13,9 @@ const Section = styled.section`
   width: 100%;
   height: 20px;
   display: flex;
+
+  justify-content: space-between;
+  align-items: center;
 `;
 
 const H1 = styled.h1`
@@ -20,10 +23,12 @@ const H1 = styled.h1`
   font-weight: normal;
   font-size: 18px;
   line-height: 21px;
-  margin: 0px;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+
+  margin: 0px;
+  max-width: 85%;
 `;
 
 const Hr = styled.div`
@@ -52,18 +57,31 @@ const Tags = styled.p`
   white-space: pre-wrap;
 `;
 
-const Bookmark = () => {
+interface pageProps {
+  pageInfo: {
+    url: string;
+    title: string;
+    interest: string;
+    time: string;
+    tags: string[];
+  };
+}
+
+const Bookmark = (props: pageProps) => {
+  const { url, title, interest, time, tags } = props.pageInfo;
   return (
     <Article>
       <Section>
-        <H1>7 Beautiful Mosaic-Tiled Stairways in San Francisco</H1>
-        <MediumInterest />
-        <SmallTime />
+        <H1 title={title}>{title}</H1>
+        <div>
+          <InterestIcon status={interest} />
+          <TimeIcon status={time} />
+        </div>
       </Section>
       <Hr />
       <Wrapper>
-        <Link>thebolditalic.com</Link>
-        <Tags>#Art</Tags>
+        <Link>{url.match(/\/{2}[\w.]+/)![0].slice(2)}</Link>
+        <Tags>{tags.join(", ")}</Tags>
       </Wrapper>
     </Article>
   );
