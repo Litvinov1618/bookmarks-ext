@@ -37,7 +37,7 @@ const Span = styled.span`
 
 declare var chrome: any;
 
-const SaveButton = () => {
+const SaveButton: React.FC = () => {
   const [AdditionalContentStatus, setAdditionalContentStatus] = useState(false);
   const [pageUrl, setPageUrl] = useState("");
   const [pageTitle, setPageTitle] = useState("");

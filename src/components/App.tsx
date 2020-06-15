@@ -13,7 +13,7 @@ const Wrapper = styled.div`
   align-items: center;
 `;
 
-const App = () => {
+const App: React.FC = () => {
   return (
     <Wrapper>
       {process.env.REACT_APP_IS_EXTENSION && <SaveButton />}

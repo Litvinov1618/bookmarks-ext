@@ -18,7 +18,7 @@ const Section = styled.section`
   align-items: center;
 `;
 
-const H1 = styled.h1`
+const A = styled.a`
   font-style: normal;
   font-weight: normal;
   font-size: 18px;
@@ -26,6 +26,8 @@ const H1 = styled.h1`
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  color: black;
+  text-decoration: none;
 
   margin: 0px;
   max-width: 85%;
@@ -57,7 +59,7 @@ const Tags = styled.p`
   white-space: pre-wrap;
 `;
 
-interface pageProps {
+interface BookmarkProps {
   pageInfo: {
     url: string;
     title: string;
@@ -67,12 +69,14 @@ interface pageProps {
   };
 }
 
-const Bookmark = (props: pageProps) => {
+const Bookmark: React.FC<BookmarkProps> = (props) => {
   const { url, title, interest, time, tags } = props.pageInfo;
   return (
     <Article>
       <Section>
-        <H1 title={title}>{title}</H1>
+        <A href={url} title={title}>
+          {title}
+        </A>
         <div>
           <InterestIcon status={interest} />
           <TimeIcon status={time} />

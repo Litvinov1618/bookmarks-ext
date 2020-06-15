@@ -3,11 +3,11 @@ import { ReactComponent as SmallTime } from "../img/small_time.svg";
 import { ReactComponent as MediumTime } from "../img/medium_time.svg";
 import { ReactComponent as HighTime } from "../img/high_time.svg";
 
-interface timeStatusProps {
+interface TimeIconProps {
   status: string;
 }
 
-const TimeIcon = (props: timeStatusProps) => {
+const TimeIcon: React.FC<TimeIconProps> = (props) => {
   switch (props.status) {
     case "small":
       return <SmallTime />;

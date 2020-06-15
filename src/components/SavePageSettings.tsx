@@ -61,14 +61,14 @@ const Button = styled.button`
   }
 `;
 
-interface pageInfo {
+interface SavePageProps {
   url: string;
   title: string;
 }
 
 declare const chrome: any;
 
-const SavePageSettings = (prop: pageInfo) => {
+const SavePageSettings: React.FC<SavePageProps> = (prop) => {
   const [time, setTime] = useState("");
   const handleTime = (event: {
     target: { value: React.SetStateAction<string> };

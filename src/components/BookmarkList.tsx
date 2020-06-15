@@ -7,7 +7,7 @@ const Wrapper = styled.main`
   min-height: 224px;
 `;
 
-const Bookmarks = () => {
+const Bookmarks: React.FC = () => {
   const allPages = [
     {
       url:
@@ -37,9 +37,9 @@ const Bookmarks = () => {
     {
       url: "https://www.youtube.com/watch?v=GW5uUze0WIs",
       title: "Youtube",
-      tags: ["DTF", "Stories", "Longread", "Dwarf Fortress"],
+      tags: ["Video", "Youtube"],
       interest: "high",
-      time: "high",
+      time: "small",
     },
   ];
   return (
