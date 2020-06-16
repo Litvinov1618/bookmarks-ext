@@ -61,6 +61,12 @@ const Button = styled.button`
   }
 `;
 
+const SavingPageInfo = styled.h2`
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+`;
+
 interface SavePageProps {
   url: string;
   title: string;
@@ -82,7 +88,6 @@ const SavePageSettings: React.FC<SavePageProps> = (prop) => {
     target: { value: React.SetStateAction<string> };
   }) => {
     setInterest(event.target.value);
-    console.log(event.target.value);
   };
 
   const [tags, setTags] = useState("");
@@ -112,8 +117,8 @@ const SavePageSettings: React.FC<SavePageProps> = (prop) => {
   return (
     <Wrapper>
       <div>
-        <h2>URL: {prop.url}</h2>
-        <h2>Title: {prop.title}</h2>
+        <SavingPageInfo>URL: {prop.url}</SavingPageInfo>
+        <SavingPageInfo>Title: {prop.title}</SavingPageInfo>
         <Label>Read Time:</Label>
         <InputList>
           <InputItem>

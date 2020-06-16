@@ -18,7 +18,7 @@ const Section = styled.section`
   align-items: center;
 `;
 
-const A = styled.a`
+const Title = styled.a`
   font-style: normal;
   font-weight: normal;
   font-size: 18px;
@@ -74,9 +74,9 @@ const Bookmark: React.FC<BookmarkProps> = (props) => {
   return (
     <Article>
       <Section>
-        <A href={url} title={title}>
+        <Title href={url} title={title}>
           {title}
-        </A>
+        </Title>
         <div>
           <InterestIcon status={interest} />
           <TimeIcon status={time} />

@@ -2,31 +2,31 @@
 
 exports[`Filters component renders correctly 1`] = `
 <nav
-  className="sc-fzpans knfSsT"
+  className="sc-fzplWN iewrLO"
 >
   <div
-    className="sc-fzplWN eFzDRM"
+    className="sc-fznyAO eAVgJY"
   >
     <div
-      className="sc-fznyAO jNSMMS"
+      className="sc-fznKkj imzLBn"
     >
       Read Time
     </div>
   </div>
   <div
-    className="sc-fzplWN eFzDRM"
+    className="sc-fznyAO eAVgJY"
   >
     <div
-      className="sc-fznyAO jNSMMS"
+      className="sc-fznKkj imzLBn"
     >
       Interest
     </div>
   </div>
   <div
-    className="sc-fzplWN eFzDRM"
+    className="sc-fznyAO eAVgJY"
   >
     <div
-      className="sc-fznyAO jNSMMS"
+      className="sc-fznKkj imzLBn"
     >
       Tags
     </div>
@@ -36,14 +36,14 @@ exports[`Filters component renders correctly 1`] = `
 
 exports[`SaveButton component renders correctly 1`] = `
 <header
-  className="sc-AxmLO cWabqP"
+  className="sc-fzozJi fIPzVO"
 >
   <div
-    className="sc-fzozJi BoHKt"
+    className="sc-fzoLsD fSPHBL"
     onClick={[Function]}
   >
     <span
-      className="sc-fzoLsD lpjFOM"
+      className="sc-fzpans eaEKEw"
     >
       Save this page
     </span>
@@ -59,10 +59,14 @@ exports[`SavePageSettings component renders correctly 1`] = `
   className="sc-AxgMl gnKkkU"
 >
   <div>
-    <h2>
+    <h2
+      className="sc-AxmLO gKzaUY"
+    >
       URL: 
     </h2>
-    <h2>
+    <h2
+      className="sc-AxmLO gKzaUY"
+    >
       Title: 
     </h2>
     <label
