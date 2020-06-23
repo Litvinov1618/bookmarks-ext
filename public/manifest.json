@@ -3,7 +3,12 @@
   "version": "1.0",
   "manifest_version": 2,
   "browser_action": {
-    "default_popup": "index.html"
+    "default_popup": "index.html",
+    "default_icon": {
+      "16": "./bookmark_16.png",
+      "24": "./bookmark_24.png",
+      "32": "./bookmark_32.png"
+    }
   },
   "permissions": ["tabs", "storage"],
   "content_security_policy": "script-src 'self' 'sha256-e7n4Pqo4Vfzc1d1Ebjp5c/iZQQHsAJShq0UgK8+0sj8='; object-src 'self'"

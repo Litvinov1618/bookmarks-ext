@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import TimeIcon from "./TimeIcon";
 import InterestIcon from "./InterestIcon";
+import { BookmarkDocument } from "../interfaces";
+import { ReactComponent as CloseButton } from "../img/close_button.svg";
 
 const Article = styled.article`
   width: 100%;
@@ -30,7 +32,7 @@ const Title = styled.a`
   text-decoration: none;
 
   margin: 0px;
-  max-width: 85%;
+  max-width: 70%;
 `;
 
 const Hr = styled.div`
@@ -59,18 +61,30 @@ const Tags = styled.p`
   white-space: pre-wrap;
 `;
 
-interface BookmarkProps {
-  pageInfo: {
-    url: string;
-    title: string;
-    interest: string;
-    time: string;
-    tags: string[];
-  };
+const StyledCloseButton = styled(CloseButton)`
+  display: none;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  ${Article}:hover & {
+    display: inline;
+  }
+`;
+
+interface BookmarkItemProps {
+  pageInfo: BookmarkDocument;
+  pageId: string;
+  remove: Function;
 }
 
-const Bookmark: React.FC<BookmarkProps> = (props) => {
+const Bookmark: React.FC<BookmarkItemProps> = (props) => {
   const { url, title, interest, time, tags } = props.pageInfo;
+
+  const deletePage = () => {
+    props.remove(props.pageId);
+  };
   return (
     <Article>
       <Section>
@@ -84,8 +98,9 @@ const Bookmark: React.FC<BookmarkProps> = (props) => {
       </Section>
       <Hr />
       <Wrapper>
-        <Link>{url.match(/\/{2}[\w.]+/)![0].slice(2)}</Link>
-        <Tags>{tags.join(", ")}</Tags>
+        <Link>{url.match(/\/{2}[\w.\\-]+/)![0].slice(2)}</Link>
+        <Tags>{tags && tags.join(", ")}</Tags>
+        <StyledCloseButton onClick={deletePage} />
       </Wrapper>
     </Article>
   );

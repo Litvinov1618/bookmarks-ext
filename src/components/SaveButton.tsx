@@ -35,7 +35,7 @@ const Span = styled.span`
   line-height: 28px;
 `;
 
-declare var chrome: any;
+declare const chrome: any;
 
 const SaveButton: React.FC = () => {
   const [AdditionalContentStatus, setAdditionalContentStatus] = useState(false);

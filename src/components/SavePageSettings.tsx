@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import TimeIcon from "./TimeIcon";
 import InterestIcon from "./InterestIcon";
+import useFirestoreCollection from "../components/Firebase/useFirestoreCollection";
 
 const InputList = styled.div`
   display: flex;
@@ -61,11 +62,11 @@ const Button = styled.button`
   }
 `;
 
-const SavingPageInfo = styled.h2`
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-`;
+// const SavingPageInfo = styled.h2`
+//   overflow: hidden;
+//   white-space: nowrap;
+//   text-overflow: ellipsis;
+// `;
 
 interface SavePageProps {
   url: string;
@@ -74,7 +75,7 @@ interface SavePageProps {
 
 declare const chrome: any;
 
-const SavePageSettings: React.FC<SavePageProps> = (prop) => {
+const SavePageSettings: React.FC<SavePageProps> = ({ url, title }) => {
   const [time, setTime] = useState("");
   const handleTime = (event: {
     target: { value: React.SetStateAction<string> };
@@ -97,28 +98,22 @@ const SavePageSettings: React.FC<SavePageProps> = (prop) => {
     setTags(event.target.value);
   };
 
-  const [savingPageInfo, setSavingPageInfo] = useState({});
+  const { add } = useFirestoreCollection("pages");
+  const [sendBtnStatus, setSendBtnStatus] = useState(false);
   const sendBookmark = () => {
-    setSavingPageInfo({
-      url: prop.url,
-      title: prop.title,
-      time,
+    add({
       interest,
-      tags: tags.split(",").map((str) => str.trim()),
+      tags: tags.split(", "),
+      time,
+      title,
+      url,
     });
-    chrome.storage.local.set(savingPageInfo, function () {
-      alert("Value is set to " + savingPageInfo);
-    });
-    chrome.storage.local.get(savingPageInfo, function () {
-      alert("Value currently is " + savingPageInfo);
-    });
+    setSendBtnStatus(true);
   };
 
   return (
     <Wrapper>
       <div>
-        <SavingPageInfo>URL: {prop.url}</SavingPageInfo>
-        <SavingPageInfo>Title: {prop.title}</SavingPageInfo>
         <Label>Read Time:</Label>
         <InputList>
           <InputItem>
@@ -193,7 +188,9 @@ const SavePageSettings: React.FC<SavePageProps> = (prop) => {
         <TextArea onChange={handleTags} value={tags} />
       </div>
       <ButtonWrapper>
-        <Button onClick={sendBookmark}>Send</Button>
+        <Button disabled={sendBtnStatus} onClick={sendBookmark}>
+          Send
+        </Button>
       </ButtonWrapper>
     </Wrapper>
   );
