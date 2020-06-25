@@ -1,8 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import SaveButton from "./SaveButton";
-import FilterList from "./FilterList";
-import BookmarkList from "./BookmarkList";
+import SavePageButton from "./SavePageButton";
+import SavedBookmarks from "./SavedBookmarks";
 
 const Wrapper = styled.div`
   width: 320px;
@@ -16,9 +15,8 @@ const Wrapper = styled.div`
 const App: React.FC = () => {
   return (
     <Wrapper>
-      {process.env.REACT_APP_IS_EXTENSION && <SaveButton />}
-      <FilterList />
-      <BookmarkList />
+      {process.env.REACT_APP_IS_EXTENSION && <SavePageButton />}
+      <SavedBookmarks />
     </Wrapper>
   );
 };

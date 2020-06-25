@@ -1,7 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import SavePageSettings from "../components/SavePageSettings";
-import SaveButton from "../components/SaveButton";
+import SavePageButton from "../components/SavePageButton";
 import FilterList from "../components/FilterList";
 
 it("SavePageSettings component renders correctly", () => {
@@ -9,8 +9,8 @@ it("SavePageSettings component renders correctly", () => {
   expect(component).toMatchSnapshot();
 });
 
-it("SaveButton component renders correctly", () => {
-  const component = renderer.create(<SaveButton />).toJSON();
+it("SavePageButton component renders correctly", () => {
+  const component = renderer.create(<SavePageButton />).toJSON();
   expect(component).toMatchSnapshot();
 });
 

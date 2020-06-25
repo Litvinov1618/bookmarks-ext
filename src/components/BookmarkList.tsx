@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import BookmarkItem from "./BookmarkItem";
-import useFirestoreCollection from "./Firebase/useFirestoreCollection";
 import { BookmarkDocument } from "../interfaces";
 
 const Wrapper = styled.main`
@@ -9,9 +8,17 @@ const Wrapper = styled.main`
   min-height: 224px;
 `;
 
-const Bookmarks: React.FC = () => {
-  const { documents, ready, remove } = useFirestoreCollection("pages");
+interface BookmarkListProps {
+  documents: any[];
+  ready: boolean;
+  remove: (pageId: string) => void;
+}
 
+const BookmarkList: React.FC<BookmarkListProps> = ({
+  documents,
+  ready,
+  remove,
+}) => {
   return (
     <Wrapper>
       {!ready && <span>Loading...</span>}
@@ -27,4 +34,4 @@ const Bookmarks: React.FC = () => {
   );
 };
 
-export default Bookmarks;
+export default BookmarkList;

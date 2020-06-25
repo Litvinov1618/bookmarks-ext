@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 const Wrapper = styled.nav`
@@ -37,17 +37,31 @@ const FilterItem = styled.div`
   font-size: 18px;
   line-height: 25px;
   text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
 
   ${Filter}:hover & {
     display: block;
   }
 `;
 
-const FilterList: React.FC = () => {
+interface FilterListProps {
+  documents: any[];
+}
+
+const FilterList: React.FC<FilterListProps> = ({ documents }) => {
+  const [tags, setTags] = useState<string[]>(["Loading"]);
+  useEffect(() => {
+    if (documents.length !== 0) {
+      const documentsTags: any[] | ((prevState: string[]) => string[]) = [];
+      documents.map((document) => documentsTags.push(document.data().tags));
+      setTags(documentsTags);
+    }
+  }, [documents]);
   const filters = {
     readTime: ["Small", "Medium", "High"],
     interest: ["Small", "Medium", "High"],
-    tags: ["tag", "NewTag", "AnotherTag"],
+    tags,
   };
 
   const handleFilterItem = (

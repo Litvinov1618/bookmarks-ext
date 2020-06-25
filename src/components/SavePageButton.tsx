@@ -44,7 +44,7 @@ declare const chrome: {
   };
 };
 
-const SaveButton: React.FC = () => {
+const SavePageButton: React.FC = () => {
   const [AdditionalContentStatus, setAdditionalContentStatus] = useState(false);
   const [pageUrl, setPageUrl] = useState("");
   const [pageTitle, setPageTitle] = useState("");
@@ -73,4 +73,4 @@ const SaveButton: React.FC = () => {
   );
 };
 
-export default SaveButton;
+export default SavePageButton;
