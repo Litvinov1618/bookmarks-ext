@@ -9,7 +9,7 @@ const Wrapper = styled.main`
 `;
 
 interface BookmarkListProps {
-  documents: any[];
+  documents: { data: () => BookmarkDocument; id: string }[];
   ready: boolean;
   remove: (pageId: string) => void;
 }
@@ -24,7 +24,7 @@ const BookmarkList: React.FC<BookmarkListProps> = ({
       {!ready && <span>Loading...</span>}
       {documents.map((document) => (
         <BookmarkItem
-          pageInfo={document.data() as BookmarkDocument}
+          pageInfo={document.data()}
           key={document.id}
           pageId={document.id}
           remove={remove}
