@@ -35,7 +35,14 @@ const Span = styled.span`
   line-height: 28px;
 `;
 
-declare const chrome: any;
+declare const chrome: {
+  tabs: {
+    query: (
+      arg0: { active: boolean; lastFocusedWindow: boolean },
+      arg1: (tabs: any[]) => void
+    ) => void;
+  };
+};
 
 const SaveButton: React.FC = () => {
   const [AdditionalContentStatus, setAdditionalContentStatus] = useState(false);

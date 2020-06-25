@@ -1,34 +1,88 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Filters component renders correctly 1`] = `
+exports[`FilterList component renders correctly 1`] = `
 <nav
-  className="sc-fzplWN iewrLO"
+  className="sc-fzpans knaLVU"
 >
   <div
-    className="sc-fznyAO eAVgJY"
+    className="sc-fzplWN gSpIEx"
   >
     <div
-      className="sc-fznKkj imzLBn"
+      className="sc-fznyAO jNSMMS"
     >
       Read Time
     </div>
-  </div>
-  <div
-    className="sc-fznyAO eAVgJY"
-  >
     <div
-      className="sc-fznKkj imzLBn"
+      className="sc-fznKkj bxpCHX"
+      onClick={[Function]}
     >
-      Interest
+      Small
+    </div>
+    <div
+      className="sc-fznKkj bxpCHX"
+      onClick={[Function]}
+    >
+      Medium
+    </div>
+    <div
+      className="sc-fznKkj bxpCHX"
+      onClick={[Function]}
+    >
+      High
     </div>
   </div>
   <div
-    className="sc-fznyAO eAVgJY"
+    className="sc-fzplWN gSpIEx"
   >
     <div
-      className="sc-fznKkj imzLBn"
+      className="sc-fznyAO jNSMMS"
+    >
+      Interest
+    </div>
+    <div
+      className="sc-fznKkj bxpCHX"
+      onClick={[Function]}
+    >
+      Small
+    </div>
+    <div
+      className="sc-fznKkj bxpCHX"
+      onClick={[Function]}
+    >
+      Medium
+    </div>
+    <div
+      className="sc-fznKkj bxpCHX"
+      onClick={[Function]}
+    >
+      High
+    </div>
+  </div>
+  <div
+    className="sc-fzplWN gSpIEx"
+  >
+    <div
+      className="sc-fznyAO jNSMMS"
     >
       Tags
+    </div>
+    <div
+      className="sc-fznKkj bxpCHX"
+      onClick={[Function]}
+    >
+      tag
+    </div>
+    <div
+      className="sc-fznKkj bxpCHX"
+      onClick={[Function]}
+    >
+      NewTag
+    </div>
+    <div
+      className="sc-fznKkj bxpCHX"
+      onClick={[Function]}
+    >
+      AnotherTag
     </div>
   </div>
 </nav>
@@ -36,14 +90,14 @@ exports[`Filters component renders correctly 1`] = `
 
 exports[`SaveButton component renders correctly 1`] = `
 <header
-  className="sc-fzozJi fIPzVO"
+  className="sc-AxmLO cWabqP"
 >
   <div
-    className="sc-fzoLsD fSPHBL"
+    className="sc-fzozJi BoHKt"
     onClick={[Function]}
   >
     <span
-      className="sc-fzpans eaEKEw"
+      className="sc-fzoLsD lpjFOM"
     >
       Save this page
     </span>
@@ -59,16 +113,6 @@ exports[`SavePageSettings component renders correctly 1`] = `
   className="sc-AxgMl gnKkkU"
 >
   <div>
-    <h2
-      className="sc-AxmLO gKzaUY"
-    >
-      URL: 
-    </h2>
-    <h2
-      className="sc-AxmLO gKzaUY"
-    >
-      Title: 
-    </h2>
     <label
       className="sc-AxhCb llbGyu"
     >
@@ -197,6 +241,7 @@ exports[`SavePageSettings component renders correctly 1`] = `
   >
     <button
       className="sc-Axmtr jQdBXG"
+      disabled={false}
       onClick={[Function]}
     >
       Send

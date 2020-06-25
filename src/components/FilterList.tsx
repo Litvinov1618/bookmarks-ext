@@ -1,0 +1,89 @@
+import React from "react";
+import styled from "styled-components";
+
+const Wrapper = styled.nav`
+  width: 300px;
+  margin-bottom: 10px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`;
+
+const Filter = styled.div`
+  width: 90px;
+  height: 100%;
+  border: 1px solid #e95656;
+  box-sizing: border-box;
+  border-radius: 5px;
+
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+const FilterName = styled.div`
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 25px;
+  text-align: center;
+`;
+
+const FilterItem = styled.div`
+  display: none;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 25px;
+  text-align: center;
+
+  ${Filter}:hover & {
+    display: block;
+  }
+`;
+
+const FilterList: React.FC = () => {
+  const filters = {
+    readTime: ["Small", "Medium", "High"],
+    interest: ["Small", "Medium", "High"],
+    tags: ["tag", "NewTag", "AnotherTag"],
+  };
+
+  const handleFilterItem = (
+    event: React.MouseEvent<HTMLDivElement, MouseEvent>
+  ) => {
+    console.log(event.target);
+  };
+
+  return (
+    <Wrapper>
+      <Filter>
+        <FilterName>Read Time</FilterName>
+        {filters.readTime.map((filterItem) => (
+          <FilterItem key={filterItem} onClick={handleFilterItem}>
+            {filterItem}
+          </FilterItem>
+        ))}
+      </Filter>
+      <Filter>
+        <FilterName>Interest</FilterName>
+        {filters.interest.map((filterItem) => (
+          <FilterItem key={filterItem} onClick={handleFilterItem}>
+            {filterItem}
+          </FilterItem>
+        ))}
+      </Filter>
+      <Filter>
+        <FilterName>Tags</FilterName>
+        {filters.tags.map((filterItem) => (
+          <FilterItem key={filterItem} onClick={handleFilterItem}>
+            {filterItem}
+          </FilterItem>
+        ))}
+      </Filter>
+    </Wrapper>
+  );
+};
+
+export default FilterList;

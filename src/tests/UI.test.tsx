@@ -2,7 +2,7 @@ import React from "react";
 import renderer from "react-test-renderer";
 import SavePageSettings from "../components/SavePageSettings";
 import SaveButton from "../components/SaveButton";
-import Filters from "../components/Filters";
+import FilterList from "../components/FilterList";
 
 it("SavePageSettings component renders correctly", () => {
   const component = renderer.create(<SavePageSettings />).toJSON();
@@ -14,7 +14,7 @@ it("SaveButton component renders correctly", () => {
   expect(component).toMatchSnapshot();
 });
 
-it("Filters component renders correctly", () => {
-  const component = renderer.create(<Filters />).toJSON();
+it("FilterList component renders correctly", () => {
+  const component = renderer.create(<FilterList />).toJSON();
   expect(component).toMatchSnapshot();
 });

@@ -62,18 +62,10 @@ const Button = styled.button`
   }
 `;
 
-// const SavingPageInfo = styled.h2`
-//   overflow: hidden;
-//   white-space: nowrap;
-//   text-overflow: ellipsis;
-// `;
-
 interface SavePageProps {
   url: string;
   title: string;
 }
-
-declare const chrome: any;
 
 const SavePageSettings: React.FC<SavePageProps> = ({ url, title }) => {
   const [time, setTime] = useState("");
@@ -98,7 +90,7 @@ const SavePageSettings: React.FC<SavePageProps> = ({ url, title }) => {
     setTags(event.target.value);
   };
 
-  const { add } = useFirestoreCollection("pages");
+  const { add } = useFirestoreCollection("pages", false);
   const [sendBtnStatus, setSendBtnStatus] = useState(false);
   const sendBookmark = () => {
     add({
