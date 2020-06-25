@@ -55,11 +55,11 @@ const FilterList: React.FC<FilterListProps> = ({ documents }) => {
   useEffect(() => {
     if (documents.length !== 0) {
       const documentsTags: string[] = [];
-      documents.map((document) => {
-        const tags = document.data().tags;
-        if (tags.indexOf("") === -1) documentsTags.push(tags);
-        return tags;
-      });
+      documents.map(
+        (document) =>
+          document.data().tags.indexOf("") === -1 &&
+          documentsTags.push(document.data().tags)
+      );
       setTags(documentsTags);
     }
   }, [documents]);
