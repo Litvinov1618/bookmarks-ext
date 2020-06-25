@@ -2,10 +2,10 @@
 
 exports[`FilterList component renders correctly 1`] = `
 <nav
-  className="sc-fzpans knaLVU"
+  className="sc-fzpans mGIeC"
 >
   <div
-    className="sc-fzplWN gSpIEx"
+    className="sc-fzplWN geDkDf"
   >
     <div
       className="sc-fznyAO jNSMMS"
@@ -13,26 +13,26 @@ exports[`FilterList component renders correctly 1`] = `
       Read Time
     </div>
     <div
-      className="sc-fznKkj ceWnMI"
+      className="sc-fznKkj bhhWfC"
       onClick={[Function]}
     >
       Small
     </div>
     <div
-      className="sc-fznKkj ceWnMI"
+      className="sc-fznKkj bhhWfC"
       onClick={[Function]}
     >
       Medium
     </div>
     <div
-      className="sc-fznKkj ceWnMI"
+      className="sc-fznKkj bhhWfC"
       onClick={[Function]}
     >
       High
     </div>
   </div>
   <div
-    className="sc-fzplWN gSpIEx"
+    className="sc-fzplWN geDkDf"
   >
     <div
       className="sc-fznyAO jNSMMS"
@@ -40,26 +40,26 @@ exports[`FilterList component renders correctly 1`] = `
       Interest
     </div>
     <div
-      className="sc-fznKkj ceWnMI"
+      className="sc-fznKkj bhhWfC"
       onClick={[Function]}
     >
       Small
     </div>
     <div
-      className="sc-fznKkj ceWnMI"
+      className="sc-fznKkj bhhWfC"
       onClick={[Function]}
     >
       Medium
     </div>
     <div
-      className="sc-fznKkj ceWnMI"
+      className="sc-fznKkj bhhWfC"
       onClick={[Function]}
     >
       High
     </div>
   </div>
   <div
-    className="sc-fzplWN gSpIEx"
+    className="sc-fzplWN geDkDf"
   >
     <div
       className="sc-fznyAO jNSMMS"
@@ -67,7 +67,7 @@ exports[`FilterList component renders correctly 1`] = `
       Tags
     </div>
     <div
-      className="sc-fznKkj ceWnMI"
+      className="sc-fznKkj bhhWfC"
       onClick={[Function]}
     >
       Loading

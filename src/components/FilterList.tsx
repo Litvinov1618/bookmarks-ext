@@ -4,6 +4,7 @@ import styled from "styled-components";
 const Wrapper = styled.nav`
   width: 300px;
   margin-bottom: 10px;
+  position: relative;
 
   display: flex;
   flex-direction: row;
@@ -16,6 +17,7 @@ const Filter = styled.div`
   border: 1px solid #e95656;
   box-sizing: border-box;
   border-radius: 5px;
+  position: relative;
 
   &:hover {
     cursor: pointer;
@@ -39,7 +41,6 @@ const FilterItem = styled.div`
   text-align: center;
   overflow: hidden;
   text-overflow: ellipsis;
-
   ${Filter}:hover & {
     display: block;
   }
@@ -53,8 +54,12 @@ const FilterList: React.FC<FilterListProps> = ({ documents }) => {
   const [tags, setTags] = useState<string[]>(["Loading"]);
   useEffect(() => {
     if (documents.length !== 0) {
-      const documentsTags: any[] | ((prevState: string[]) => string[]) = [];
-      documents.map((document) => documentsTags.push(document.data().tags));
+      const documentsTags: any[] = [];
+      documents.map((document) => {
+        const tags = document.data().tags;
+        if (tags.indexOf("") === -1) documentsTags.push(tags);
+        return tags;
+      });
       setTags(documentsTags);
     }
   }, [documents]);
