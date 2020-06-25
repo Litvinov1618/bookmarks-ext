@@ -54,7 +54,7 @@ const FilterList: React.FC<FilterListProps> = ({ documents }) => {
   const [tags, setTags] = useState<string[]>(["Loading"]);
   useEffect(() => {
     if (documents.length !== 0) {
-      const documentsTags: any[] = [];
+      const documentsTags: string[] = [];
       documents.map((document) => {
         const tags = document.data().tags;
         if (tags.indexOf("") === -1) documentsTags.push(tags);
