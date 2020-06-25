@@ -47,7 +47,7 @@ const FilterItem = styled.div`
 `;
 
 interface FilterListProps {
-  documents: any[];
+  documents: { data: () => { tags: string } }[];
 }
 
 const FilterList: React.FC<FilterListProps> = ({ documents }) => {
