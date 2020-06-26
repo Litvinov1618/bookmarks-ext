@@ -14,8 +14,16 @@ const SavedBookmarks = () => {
 
   return (
     <>
-      <FilterList documents={documents} query={query} collection={collection} />
-      <BookmarkList documents={documents} ready={ready} remove={remove} />
+      {ready && (
+        <>
+          <FilterList
+            documents={documents}
+            query={query}
+            collection={collection}
+          />
+          <BookmarkList documents={documents} ready={ready} remove={remove} />
+        </>
+      )}
     </>
   );
 };
