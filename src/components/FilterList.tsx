@@ -48,9 +48,19 @@ const FilterItem = styled.div`
 
 interface FilterListProps {
   documents: { data: () => { tags: string } }[];
+  query: React.Dispatch<
+    React.SetStateAction<
+      firebase.firestore.CollectionReference<firebase.firestore.DocumentData>
+    >
+  >;
+  collection: any;
 }
 
-const FilterList: React.FC<FilterListProps> = ({ documents }) => {
+const FilterList: React.FC<FilterListProps> = ({
+  documents,
+  query,
+  collection,
+}) => {
   const [tags, setTags] = useState<string[]>(["Loading"]);
   useEffect(() => {
     if (documents.length !== 0) {
@@ -72,12 +82,32 @@ const FilterList: React.FC<FilterListProps> = ({ documents }) => {
   const handleFilterItem = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => {
-    console.log(event.target);
+    applyFilters(event.target as HTMLInputElement);
+  };
+
+  const applyFilters = (element: HTMLInputElement) => {
+    const filterName = element.parentElement!.id;
+    if (filterName === "tags") {
+      query(
+        collection.where(
+          `${filterName}`,
+          "array-contains",
+          `${element.innerText}`
+        )
+      );
+    } else
+      query(
+        collection.where(
+          `${filterName}`,
+          "==",
+          `${element.innerText.toLowerCase()}`
+        )
+      );
   };
 
   return (
     <Wrapper>
-      <Filter>
+      <Filter id="time">
         <FilterName>Read Time</FilterName>
         {filters.readTime.map((filterItem) => (
           <FilterItem key={filterItem} onClick={handleFilterItem}>
@@ -85,7 +115,7 @@ const FilterList: React.FC<FilterListProps> = ({ documents }) => {
           </FilterItem>
         ))}
       </Filter>
-      <Filter>
+      <Filter id="interest">
         <FilterName>Interest</FilterName>
         {filters.interest.map((filterItem) => (
           <FilterItem key={filterItem} onClick={handleFilterItem}>
@@ -93,7 +123,7 @@ const FilterList: React.FC<FilterListProps> = ({ documents }) => {
           </FilterItem>
         ))}
       </Filter>
-      <Filter>
+      <Filter id="tags">
         <FilterName>Tags</FilterName>
         {filters.tags.map((filterItem) => (
           <FilterItem key={filterItem} onClick={handleFilterItem}>

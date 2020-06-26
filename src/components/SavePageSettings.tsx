@@ -8,12 +8,12 @@ const InputList = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-right: 70px;
 `;
 
 const InputItem = styled.div`
   display: flex;
   align-items: center;
-  margin-right: 50px;
 `;
 
 const Input = styled.input`
@@ -29,7 +29,13 @@ const TextArea = styled.textarea`
   border: 1px solid #e95656;
   box-sizing: border-box;
   border-radius: 10px;
+  padding: 5px;
   width: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   resize: none;
 `;
 
@@ -38,7 +44,7 @@ const Wrapper = styled.div`
   justify-content: space-between;
   flex-direction: column;
 
-  min-height: 290px;
+  min-height: 240px;
   padding: 0 14px;
 `;
 
@@ -177,7 +183,7 @@ const SavePageSettings: React.FC<SavePageProps> = ({ url, title }) => {
       </div>
       <div>
         <Label>Tags:</Label>
-        <TextArea onChange={handleTags} value={tags} />
+        <TextArea placeholder="Tags" onChange={handleTags} value={tags} />
       </div>
       <ButtonWrapper>
         <Button disabled={sendBtnStatus} onClick={sendBookmark}>
