@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 const Wrapper = styled.nav`
   width: 300px;
+  height: 30px;
   margin-bottom: 10px;
   position: relative;
 
@@ -13,11 +14,14 @@ const Wrapper = styled.nav`
 
 const Filter = styled.div`
   width: 90px;
-  height: 100%;
+  background-color: white;
+  z-index: 9999;
   border: 1px solid #e95656;
   box-sizing: border-box;
   border-radius: 5px;
-  position: relative;
+  position: absolute;
+  top: 0;
+  right: 0;
 
   &:hover {
     cursor: pointer;
@@ -41,9 +45,15 @@ const FilterItem = styled.div`
   text-align: center;
   overflow: hidden;
   text-overflow: ellipsis;
+
   ${Filter}:hover & {
     display: block;
   }
+`;
+
+const FilterWrapper = styled.div`
+  width: 90px;
+  position: relative;
 `;
 
 interface FilterListProps {
@@ -107,30 +117,36 @@ const FilterList: React.FC<FilterListProps> = ({
 
   return (
     <Wrapper>
-      <Filter id="time">
-        <FilterName>Read Time</FilterName>
-        {filters.readTime.map((filterItem) => (
-          <FilterItem key={filterItem} onClick={handleFilterItem}>
-            {filterItem}
-          </FilterItem>
-        ))}
-      </Filter>
-      <Filter id="interest">
-        <FilterName>Interest</FilterName>
-        {filters.interest.map((filterItem) => (
-          <FilterItem key={filterItem} onClick={handleFilterItem}>
-            {filterItem}
-          </FilterItem>
-        ))}
-      </Filter>
-      <Filter id="tags">
-        <FilterName>Tags</FilterName>
-        {filters.tags.map((filterItem) => (
-          <FilterItem key={filterItem} onClick={handleFilterItem}>
-            {filterItem}
-          </FilterItem>
-        ))}
-      </Filter>
+      <FilterWrapper>
+        <Filter id="time">
+          <FilterName>Read Time</FilterName>
+          {filters.readTime.map((filterItem) => (
+            <FilterItem key={filterItem} onClick={handleFilterItem}>
+              {filterItem}
+            </FilterItem>
+          ))}
+        </Filter>
+      </FilterWrapper>
+      <FilterWrapper>
+        <Filter id="interest">
+          <FilterName>Interest</FilterName>
+          {filters.interest.map((filterItem) => (
+            <FilterItem key={filterItem} onClick={handleFilterItem}>
+              {filterItem}
+            </FilterItem>
+          ))}
+        </Filter>
+      </FilterWrapper>
+      <FilterWrapper>
+        <Filter id="tags">
+          <FilterName>Tags</FilterName>
+          {filters.tags.map((filterItem) => (
+            <FilterItem key={filterItem} onClick={handleFilterItem}>
+              {filterItem}
+            </FilterItem>
+          ))}
+        </Filter>
+      </FilterWrapper>
     </Wrapper>
   );
 };

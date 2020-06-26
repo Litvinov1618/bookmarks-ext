@@ -7,8 +7,9 @@ import { ReactComponent as CloseButton } from "../img/close_button.svg";
 
 const Article = styled.article`
   width: 100%;
-  height: 55px;
-  margin-bottom: 5px;
+  position: relative;
+  max-height: 55px;
+  margin-bottom: 10px;
 `;
 
 const Section = styled.section`
@@ -32,7 +33,7 @@ const Title = styled.a`
   text-decoration: none;
 
   margin: 0px;
-  max-width: 70%;
+  max-width: 85%;
 `;
 
 const Hr = styled.div`
@@ -63,6 +64,9 @@ const Tags = styled.p`
 
 const StyledCloseButton = styled(CloseButton)`
   display: none;
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
 
   &:hover {
     cursor: pointer;
@@ -100,8 +104,8 @@ const Bookmark: React.FC<BookmarkItemProps> = (props) => {
       <Wrapper>
         <Link>{url.match(/\/{2}[\w.\\-]+/)![0].slice(2)}</Link>
         <Tags>{tags && tags.join(", ")}</Tags>
-        <StyledCloseButton onClick={deletePage} />
       </Wrapper>
+      <StyledCloseButton onClick={deletePage} />
     </Article>
   );
 };
