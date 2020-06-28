@@ -45,12 +45,10 @@ declare const chrome: {
 };
 
 const SavePageButton: React.FC = () => {
-  const [AdditionalContentStatus, setAdditionalContentStatus] = useState(false);
   const [pageUrl, setPageUrl] = useState("");
   const [pageTitle, setPageTitle] = useState("");
   const savePage = () => {
-    if (AdditionalContentStatus === false) {
-      setAdditionalContentStatus(true);
+    if (process.env.REACT_APP_IS_EXTENSION) {
       chrome.tabs.query(
         { active: true, lastFocusedWindow: true },
         (tabs: Array<any>) => {
@@ -58,7 +56,7 @@ const SavePageButton: React.FC = () => {
           setPageTitle(tabs[0].title);
         }
       );
-    } else setAdditionalContentStatus(false);
+    }
   };
   return (
     <Wrapper>
@@ -66,9 +64,7 @@ const SavePageButton: React.FC = () => {
         <Span>Save this page</Span>
         <ArrowDown />
       </MainContent>
-      {AdditionalContentStatus && (
-        <SavePageSettings url={pageUrl} title={pageTitle} />
-      )}
+      <SavePageSettings url={pageUrl} title={pageTitle} />
     </Wrapper>
   );
 };

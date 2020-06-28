@@ -15,7 +15,7 @@ const Wrapper = styled.div`
 const App: React.FC = () => {
   return (
     <Wrapper>
-      {process.env.REACT_APP_IS_EXTENSION && <SavePageButton />}
+      <SavePageButton />
       <SavedBookmarks />
     </Wrapper>
   );
