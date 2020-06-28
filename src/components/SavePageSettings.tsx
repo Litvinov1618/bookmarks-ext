@@ -4,64 +4,63 @@ import TimeIcon from "./TimeIcon";
 import InterestIcon from "./InterestIcon";
 import useFirestoreCollection from "../components/Firebase/useFirestoreCollection";
 
-const InputList = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-right: 70px;
-`;
-
-const InputItem = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const Input = styled.input`
-  margin-right: 5px;
-`;
-
 const Label = styled.label`
   margin-bottom: 10px;
   display: block;
 `;
 
-const TextArea = styled.textarea`
+const TagsArea = styled.textarea`
   border: 1px solid #e95656;
   box-sizing: border-box;
-  border-radius: 10px;
-  padding: 5px;
-  width: 100%;
+  border-radius: 5px;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   resize: none;
+
+  height: 30px;
+  padding: 5px;
+  width: 40%;
 `;
 
 const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-
-  min-height: 240px;
-  padding: 0 14px;
-`;
-
-const ButtonWrapper = styled.div`
-  text-align: center;
+  height: 90px;
 `;
 
 const Button = styled.button`
   width: 90px;
-  height: 29px;
-  margin-bottom: 10px;
+  height: 30px;
+  margin-left: 28px;
+  padding: 5px;
 
   border: 1px solid #e95656;
   box-sizing: border-box;
   border-radius: 5px;
   background-color: white;
   font-size: 18px;
+
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+const InputWrapper = styled.div`
+  width: 50%;
+`;
+
+const InputGroup = styled.div`
+  display: flex;
+`;
+
+const IconWrapper = styled.div`
+  margin-right: 10px;
+  display: inline-block;
+  position: relative
 
   &:hover {
     cursor: pointer;
@@ -111,85 +110,38 @@ const SavePageSettings: React.FC<SavePageProps> = ({ url, title }) => {
 
   return (
     <Wrapper>
-      <div>
-        <Label>Read Time:</Label>
-        <InputList>
-          <InputItem>
-            <Input
-              type="radio"
-              name="time"
-              value="small"
-              checked={time === "small"}
-              onChange={handleTime}
-            />
+      <InputGroup>
+        <InputWrapper>
+          <Label>Read Time:</Label>
+          <IconWrapper>
             <TimeIcon status="small" />
-          </InputItem>
-          <InputItem>
-            <Input
-              type="radio"
-              name="time"
-              value="medium"
-              checked={time === "medium"}
-              onChange={handleTime}
-            />
+          </IconWrapper>
+          <IconWrapper>
             <TimeIcon status="medium" />
-          </InputItem>
-          <InputItem>
-            <Input
-              type="radio"
-              name="time"
-              value="high"
-              checked={time === "high"}
-              onChange={handleTime}
-            />
+          </IconWrapper>
+          <IconWrapper>
             <TimeIcon status="high" />
-          </InputItem>
-        </InputList>
-      </div>
-      <div>
-        <Label>Interest:</Label>
-        <InputList>
-          <InputItem>
-            <Input
-              type="radio"
-              name="interest"
-              value="small"
-              onChange={handleInterest}
-              checked={interest === "small"}
-            />
+          </IconWrapper>
+        </InputWrapper>
+        <InputWrapper>
+          <Label>Interest:</Label>
+          <IconWrapper>
             <InterestIcon status="small" />
-          </InputItem>
-          <InputItem>
-            <Input
-              type="radio"
-              name="interest"
-              value="medium"
-              onChange={handleInterest}
-              checked={interest === "medium"}
-            />
+          </IconWrapper>
+          <IconWrapper>
             <InterestIcon status="medium" />
-          </InputItem>
-          <InputItem>
-            <Input
-              type="radio"
-              name="interest"
-              value="high"
-              onChange={handleInterest}
-              checked={interest === "high"}
-            />
+          </IconWrapper>
+          <IconWrapper>
             <InterestIcon status="high" />
-          </InputItem>
-        </InputList>
-      </div>
-      <div>
-        <Label>Tags:</Label>
-        <TextArea placeholder="Tags" onChange={handleTags} value={tags} />
-      </div>
-      <ButtonWrapper>
+          </IconWrapper>
+        </InputWrapper>
+      </InputGroup>
+      <InputGroup>
+        <TagsArea placeholder="Tags" onChange={handleTags} value={tags} />
         <Button disabled={sendBtnStatus} onClick={sendBookmark}>
           Send
         </Button>
-      </ButtonWrapper>
+      </InputGroup>
     </Wrapper>
   );
 };

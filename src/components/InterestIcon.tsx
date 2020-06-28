@@ -7,8 +7,8 @@ interface InterestIconProps {
   status: string;
 }
 
-const InterestIcon: React.FC<InterestIconProps> = (props) => {
-  switch (props.status) {
+const InterestIcon: React.FC<InterestIconProps> = ({ status }) => {
+  switch (status) {
     case "small":
       return <SmallInterest />;
     case "medium":

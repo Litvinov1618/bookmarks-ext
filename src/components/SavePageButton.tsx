@@ -1,31 +1,21 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { ReactComponent as ArrowDown } from "../img/arrow_down.svg";
 import SavePageSettings from "./SavePageSettings";
 
 const Wrapper = styled.header`
-  width: 300px;
-  min-height: 50px;
-  margin: 4px 0 10px 0;
-
   border: 2px solid #e95656;
   box-sizing: border-box;
   border-radius: 20px;
 
+  min-height: 50px;
+  width: 300px;
+  margin: 4px 0 10px 0;
   display: flex;
   flex-direction: column;
 `;
 
 const MainContent = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  padding: 11px 14px;
-
-  &:hover {
-    cursor: pointer;
-  }
+  padding: 10px;
 `;
 
 const Span = styled.span`
@@ -33,6 +23,9 @@ const Span = styled.span`
   font-weight: normal;
   font-size: 24px;
   line-height: 28px;
+
+  display: block;
+  margin-bottom: 5px;
 `;
 
 declare const chrome: {
@@ -62,9 +55,8 @@ const SavePageButton: React.FC = () => {
     <Wrapper>
       <MainContent onClick={savePage}>
         <Span>Save this page</Span>
-        <ArrowDown />
+        <SavePageSettings url={pageUrl} title={pageTitle} />
       </MainContent>
-      <SavePageSettings url={pageUrl} title={pageTitle} />
     </Wrapper>
   );
 };

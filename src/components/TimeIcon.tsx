@@ -7,8 +7,8 @@ interface TimeIconProps {
   status: string;
 }
 
-const TimeIcon: React.FC<TimeIconProps> = (props) => {
-  switch (props.status) {
+const TimeIcon: React.FC<TimeIconProps> = ({ status }) => {
+  switch (status) {
     case "small":
       return <SmallTime />;
     case "medium":
