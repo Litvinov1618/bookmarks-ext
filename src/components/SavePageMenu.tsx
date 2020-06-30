@@ -73,6 +73,11 @@ const Button = styled.button`
   &:hover {
     cursor: pointer;
   }
+
+  &:active {
+    transform: translateY(1px);
+    filter: saturate(150%);
+  }
 `;
 
 const InputWrapper = styled.div`
@@ -102,6 +107,12 @@ const IconWrapper = styled.button<IconWrapperProps>`
 
   &:hover {
     cursor: pointer;
+    border-color: #e95656;
+  }
+
+  &:active {
+    transform: translateY(1px);
+    filter: saturate(150%);
   }
 `;
 

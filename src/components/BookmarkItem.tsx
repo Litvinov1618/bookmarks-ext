@@ -3,7 +3,7 @@ import styled from "styled-components";
 import TimeIcon from "./TimeIcon";
 import InterestIcon from "./InterestIcon";
 import { BookmarkDocument } from "../interfaces";
-import { ReactComponent as CloseButton } from "../img/close_button.svg";
+import { ReactComponent as DoneButton } from "../img/done_button.svg";
 
 const Article = styled.article`
   width: 100%;
@@ -62,7 +62,7 @@ const Tags = styled.p`
   white-space: pre-wrap;
 `;
 
-const StyledCloseButton = styled(CloseButton)`
+const StyledCloseButton = styled(DoneButton)`
   display: none;
   position: absolute;
   bottom: 0px;
@@ -83,7 +83,7 @@ interface BookmarkItemProps {
   remove: Function;
 }
 
-const BookmarkItem: React.FC<BookmarkItemProps> = (props) => {
+const Bookmark: React.FC<BookmarkItemProps> = (props) => {
   const { url, title, interest, time, tags } = props.pageInfo;
 
   const deletePage = () => {
@@ -96,8 +96,8 @@ const BookmarkItem: React.FC<BookmarkItemProps> = (props) => {
           {title}
         </Title>
         <div>
-          {interest && <InterestIcon status={interest} />}
-          {time && <TimeIcon status={time} />}
+          <InterestIcon status={interest} />
+          <TimeIcon status={time} />
         </div>
       </Section>
       <Hr />
@@ -110,4 +110,4 @@ const BookmarkItem: React.FC<BookmarkItemProps> = (props) => {
   );
 };
 
-export default BookmarkItem;
+export default Bookmark;
