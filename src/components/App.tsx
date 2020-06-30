@@ -6,6 +6,7 @@ import SavedBookmarks from "./SavedBookmarks";
 const Wrapper = styled.div`
   width: 320px;
   min-height: 400px;
+  position: relative;
 
   display: flex;
   flex-direction: column;

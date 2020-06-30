@@ -2,6 +2,7 @@ import React from "react";
 import FilterList from "./FilterList";
 import BookmarkList from "./BookmarkList";
 import useFirestoreCollection from "./Firebase/useFirestoreCollection";
+import LoadingIcon from "./LoadingIcon";
 
 const SavedBookmarks = () => {
   const {
@@ -14,6 +15,7 @@ const SavedBookmarks = () => {
 
   return (
     <>
+      {!ready && <LoadingIcon speed={1} color="#e95656" />}
       {ready && (
         <>
           <FilterList
