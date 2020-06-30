@@ -83,7 +83,7 @@ interface BookmarkItemProps {
   remove: Function;
 }
 
-const Bookmark: React.FC<BookmarkItemProps> = (props) => {
+const BookmarkItem: React.FC<BookmarkItemProps> = (props) => {
   const { url, title, interest, time, tags } = props.pageInfo;
 
   const deletePage = () => {
@@ -96,8 +96,8 @@ const Bookmark: React.FC<BookmarkItemProps> = (props) => {
           {title}
         </Title>
         <div>
-          <InterestIcon status={interest} />
-          <TimeIcon status={time} />
+          {interest && <InterestIcon status={interest} />}
+          {time && <TimeIcon status={time} />}
         </div>
       </Section>
       <Hr />
@@ -110,4 +110,4 @@ const Bookmark: React.FC<BookmarkItemProps> = (props) => {
   );
 };
 
-export default Bookmark;
+export default BookmarkItem;

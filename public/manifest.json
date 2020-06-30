@@ -10,6 +10,6 @@
       "32": "./bookmark_32.png"
     }
   },
-  "permissions": ["tabs", "storage"],
+  "permissions": ["tabs"],
   "content_security_policy": "script-src 'self' 'sha256-e7n4Pqo4Vfzc1d1Ebjp5c/iZQQHsAJShq0UgK8+0sj8='; object-src 'self'"
 }

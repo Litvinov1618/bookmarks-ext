@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-import SavePageButton from "./SavePageButton";
+import SavePageMenu from "./SavePageMenu";
 import SavedBookmarks from "./SavedBookmarks";
 
 const Wrapper = styled.div`
   width: 320px;
-  min-height: 329px;
+  min-height: 400px;
 
   display: flex;
   flex-direction: column;
@@ -15,7 +15,7 @@ const Wrapper = styled.div`
 const App: React.FC = () => {
   return (
     <Wrapper>
-      <SavePageButton />
+      <SavePageMenu />
       <SavedBookmarks />
     </Wrapper>
   );
