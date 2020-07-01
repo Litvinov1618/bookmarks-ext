@@ -28,11 +28,24 @@ const useFirestoreCollection = (collectionName = "pages", immediate = true) => {
     collection.add(pageInfo);
   };
 
-  const remove = (pageId: string) => {
-    collection.doc(pageId).delete();
+  const remove = (bookmarkId: string) => {
+    collection.doc(bookmarkId).delete();
   };
 
-  return { documents, collection, ready, query: setQuery, add, remove };
+  const archive = (pageId: string, pageInfo: BookmarkDocument) => {
+    pageInfo.archived = true;
+    collection.doc(pageId).update(pageInfo);
+  };
+
+  return {
+    documents,
+    collection,
+    ready,
+    query: setQuery,
+    add,
+    remove,
+    archive,
+  };
 };
 
 export default useFirestoreCollection;

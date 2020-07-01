@@ -3,7 +3,6 @@ import styled from "styled-components";
 import TimeIcon from "./TimeIcon";
 import InterestIcon from "./InterestIcon";
 import { BookmarkDocument } from "../interfaces";
-import { ReactComponent as DoneButton } from "../img/done_button.svg";
 
 const Article = styled.article`
   width: 100%;
@@ -62,7 +61,7 @@ const Tags = styled.p`
   white-space: pre-wrap;
 `;
 
-const StyledCloseButton = styled(DoneButton)`
+const CloseButtonWrapper = styled.div`
   display: none;
   position: absolute;
   bottom: 0px;
@@ -80,14 +79,16 @@ const StyledCloseButton = styled(DoneButton)`
 interface BookmarkItemProps {
   pageInfo: BookmarkDocument;
   pageId: string;
-  remove: Function;
+  close: Function;
+  closeButtonIcon: Function;
 }
 
 const Bookmark: React.FC<BookmarkItemProps> = (props) => {
   const { url, title, interest, time, tags } = props.pageInfo;
+  const CloseButtonIcon = props.closeButtonIcon;
 
-  const deletePage = () => {
-    props.remove(props.pageId);
+  const closePage = () => {
+    props.close(props.pageId, props.pageInfo);
   };
   return (
     <Article>
@@ -105,7 +106,9 @@ const Bookmark: React.FC<BookmarkItemProps> = (props) => {
         <Link>{url.match(/\/{2}[\w.\\-]+/)![0].slice(2)}</Link>
         <Tags>{tags && tags.join(", ")}</Tags>
       </Wrapper>
-      <StyledCloseButton onClick={deletePage} />
+      <CloseButtonWrapper onClick={closePage}>
+        <CloseButtonIcon />
+      </CloseButtonWrapper>
     </Article>
   );
 };

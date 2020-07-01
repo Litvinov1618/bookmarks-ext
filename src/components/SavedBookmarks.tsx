@@ -8,9 +8,10 @@ const SavedBookmarks = () => {
   const {
     documents,
     ready,
-    remove,
     query,
     collection,
+    archive,
+    remove,
   } = useFirestoreCollection("pages");
 
   return (
@@ -23,7 +24,12 @@ const SavedBookmarks = () => {
             query={query}
             collection={collection}
           />
-          <BookmarkList documents={documents} ready={ready} remove={remove} />
+          <BookmarkList
+            documents={documents}
+            ready={ready}
+            archive={archive}
+            remove={remove}
+          />
         </>
       )}
     </>

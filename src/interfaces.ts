@@ -2,12 +2,6 @@ export interface IChromeAPI {
   tabs: {
     query: Function;
   };
-  storage: {
-    local: {
-      get: Function;
-      set: Function;
-    };
-  };
 }
 
 export interface BookmarkDocument extends firebase.firestore.DocumentData {
@@ -16,4 +10,5 @@ export interface BookmarkDocument extends firebase.firestore.DocumentData {
   interest: string;
   time: string;
   tags: string[];
+  archived: boolean;
 }

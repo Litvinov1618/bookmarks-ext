@@ -3,6 +3,7 @@ import styled from "styled-components";
 import TimeIcon from "./TimeIcon";
 import InterestIcon from "./InterestIcon";
 import useFirestoreCollection from "./Firebase/useFirestoreCollection";
+import { IChromeAPI } from "../interfaces";
 
 const Header = styled.header`
   border: 2px solid #e95656;
@@ -116,16 +117,9 @@ const IconWrapper = styled.button<IconWrapperProps>`
   }
 `;
 
-declare const chrome: {
-  tabs: {
-    query: (
-      arg0: { active: boolean; lastFocusedWindow: boolean },
-      arg1: (tabs: any[]) => void
-    ) => void;
-  };
-};
+declare const chrome: IChromeAPI;
 
-const SavePageSettings: React.FC = () => {
+const SaveBookmarkMenu: React.FC = () => {
   const [time, setTime] = useState("");
   const handleTime = (str: string) => {
     setTime(str);
@@ -168,6 +162,7 @@ const SavePageSettings: React.FC = () => {
         time,
         title,
         url,
+        archived: false,
       });
       console.log(
         JSON.stringify({
@@ -243,4 +238,4 @@ const SavePageSettings: React.FC = () => {
   );
 };
 
-export default SavePageSettings;
+export default SaveBookmarkMenu;

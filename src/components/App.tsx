@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import SavePageMenu from "./SavePageMenu";
+import SavePageMenu from "./SaveBookmarkMenu";
 import SavedBookmarks from "./SavedBookmarks";
 
 const Wrapper = styled.div`
