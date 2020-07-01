@@ -97,8 +97,8 @@ const Bookmark: React.FC<BookmarkItemProps> = (props) => {
           {title}
         </Title>
         <div>
-          <InterestIcon status={interest} />
-          <TimeIcon status={time} />
+          {interest && <InterestIcon status={interest} />}
+          {time && <TimeIcon status={time} />}
         </div>
       </Section>
       <Hr />

@@ -36,7 +36,6 @@ interface BookmarkListProps {
 
 const BookmarkList: React.FC<BookmarkListProps> = ({
   documents,
-  ready,
   archive,
   remove,
 }) => {
@@ -53,7 +52,6 @@ const BookmarkList: React.FC<BookmarkListProps> = ({
   };
   return (
     <Wrapper>
-      {!ready && <span>Loading...</span>}
       {activePages.map((page) => (
         <BookmarkItem
           pageInfo={page.data()}
