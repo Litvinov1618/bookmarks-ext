@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import InterestIcon from "./InterestIcon";
+import TimeIcon from "./TimeIcon";
 
 const Filter = styled.div`
   width: 90px;
@@ -48,27 +50,36 @@ const Wrapper = styled.div`
 interface FilterItemProps {
   filterName: string;
   filterUnits: string[];
-  applyFilters: Function;
+  setFilter: React.Dispatch<React.SetStateAction<string>>;
+  currentFilter: string;
 }
 
 const FilterItem: React.FC<FilterItemProps> = ({
   filterName,
   filterUnits,
-  applyFilters,
+  setFilter,
+  currentFilter,
 }) => {
-  const handleFilterItem = (
-    event: React.MouseEvent<HTMLDivElement, MouseEvent>
-  ) => {
-    applyFilters(event.target as HTMLInputElement);
+  const handleFilterItem = (filterItem: string) => {
+    setFilter(filterItem);
   };
 
   return (
     <Wrapper>
       <Filter id={`${filterName.toLowerCase()}`}>
-        <FilterName>{filterName}</FilterName>
+        <FilterName>{currentFilter || filterName}</FilterName>
         {filterUnits.map((filterItem) => (
-          <FilterUnit key={filterItem} onClick={handleFilterItem}>
-            {filterItem}
+          <FilterUnit
+            key={filterItem}
+            onClick={() => handleFilterItem(filterItem)}
+          >
+            {filterName === "Time" && (
+              <TimeIcon status={filterItem.toLowerCase()} />
+            )}
+            {filterName === "Interest" && (
+              <InterestIcon status={filterItem.toLowerCase()} />
+            )}
+            {filterName === "Tags" && filterItem}
           </FilterUnit>
         ))}
       </Filter>

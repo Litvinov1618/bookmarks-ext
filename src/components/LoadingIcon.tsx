@@ -6,7 +6,7 @@ const commonStyle = {
   position: "absolute",
   left: 0,
   right: 0,
-  top: "20%",
+  top: "40%",
   bottom: 0,
 };
 
