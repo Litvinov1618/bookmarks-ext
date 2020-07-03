@@ -17,8 +17,9 @@ const ClearFiltersButton = styled.button`
   margin: 0 auto;
 
   background-color: white;
+  outline: none;
   border-radius: 28px;
-  border: 1px solid #e95656;
+  border: 1px solid grey;
   display: inline-block;
   cursor: pointer;
   color: grey;

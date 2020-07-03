@@ -62,7 +62,7 @@ const Wrapper = styled.div`
 const Button = styled.button`
   width: 90px;
   height: 30px;
-  margin-left: 28px;
+  margin-left: 23px;
   padding: 5px;
 
   border: 1px solid #e95656;

@@ -8,9 +8,10 @@ import LoadingIcon from "./LoadingIcon";
 
 const Wrapper = styled.main`
   width: 300px;
-  min-height: 224px;
+  height: 250px;
   display: flex;
   flex-direction: column;
+  overflow: auto;
 `;
 
 const ArchivedPagesButton = styled.button`
@@ -18,7 +19,7 @@ const ArchivedPagesButton = styled.button`
 
   background-color: white;
   border-radius: 28px;
-  border: 1px solid #e95656;
+  border: 1px solid grey;
   display: inline-block;
   cursor: pointer;
   color: grey;
