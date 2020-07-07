@@ -4,7 +4,6 @@ import BookmarkItem from "./BookmarkItem";
 import { BookmarkDocument } from "../interfaces";
 import { ReactComponent as DoneButton } from "../img/done_button.svg";
 import { ReactComponent as DeleteButton } from "../img/delete_button.svg";
-import LoadingIcon from "./LoadingIcon";
 
 const Wrapper = styled.main`
   width: 300px;
@@ -32,7 +31,6 @@ const ArchivedPagesButton = styled.button`
 
 interface BookmarkListProps {
   documents: { data: () => BookmarkDocument; id: string }[];
-  ready: boolean;
   archive: (pageId: string, pageInfo: BookmarkDocument) => void;
   remove: (pageId: string) => void;
 }
@@ -41,7 +39,6 @@ const BookmarkList: React.FC<BookmarkListProps> = ({
   documents,
   archive,
   remove,
-  ready,
 }) => {
   const activePages: { data: () => BookmarkDocument; id: string }[] = [];
   const archivedPages: { data: () => BookmarkDocument; id: string }[] = [];
@@ -56,33 +53,30 @@ const BookmarkList: React.FC<BookmarkListProps> = ({
   };
   return (
     <>
-      {!ready && <LoadingIcon speed={1} color="#e95656" />}
-      {ready && (
-        <Wrapper>
-          {activePages.map((page) => (
+      <Wrapper>
+        {activePages.map((page) => (
+          <BookmarkItem
+            pageInfo={page.data()}
+            key={page.id}
+            pageId={page.id}
+            close={archive}
+            closeButtonIcon={DoneButton}
+          />
+        ))}
+        <ArchivedPagesButton onClick={handleClick}>
+          Archived pages
+        </ArchivedPagesButton>
+        {showArchivedPages &&
+          archivedPages.map((page) => (
             <BookmarkItem
               pageInfo={page.data()}
               key={page.id}
               pageId={page.id}
-              close={archive}
-              closeButtonIcon={DoneButton}
+              close={remove}
+              closeButtonIcon={DeleteButton}
             />
           ))}
-          <ArchivedPagesButton onClick={handleClick}>
-            Archived pages
-          </ArchivedPagesButton>
-          {showArchivedPages &&
-            archivedPages.map((page) => (
-              <BookmarkItem
-                pageInfo={page.data()}
-                key={page.id}
-                pageId={page.id}
-                close={remove}
-                closeButtonIcon={DeleteButton}
-              />
-            ))}
-        </Wrapper>
-      )}
+      </Wrapper>
     </>
   );
 };

@@ -1,9 +1,9 @@
 export default {
-  apiKey: "AIzaSyBFU_DdRZGjUmPlCQSToz88mbUAzKeG3x4",
-  authDomain: "bookmarks-ext.firebaseapp.com",
-  databaseURL: "https://bookmarks-ext.firebaseio.com",
-  projectId: "bookmarks-ext",
-  storageBucket: "bookmarks-ext.appspot.com",
-  messagingSenderId: "1060514711729",
-  appId: "1:1060514711729:web:cbb74711149fc284707a90"
+  apiKey: "AIzaSyDukGnZ9F8lU5A1voIQUq0xv_fY1SD3Q6Y",
+  authDomain: "bookmarks-extension.firebaseapp.com",
+  databaseURL: "https://bookmarks-extension.firebaseio.com",
+  projectId: "bookmarks-extension",
+  storageBucket: "bookmarks-extension.appspot.com",
+  messagingSenderId: "880963683395",
+  appId: "1:880963683395:web:44f7b97668a368973c80f6",
 };

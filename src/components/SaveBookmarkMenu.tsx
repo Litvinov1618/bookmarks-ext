@@ -3,6 +3,7 @@ import styled from "styled-components";
 import TimeIcon from "./TimeIcon";
 import InterestIcon from "./InterestIcon";
 import useFirestoreCollection from "./Firebase/useFirestoreCollection";
+import useFirestoreCollectionTags from "./Firebase/useFirestoreCollectionTags";
 import { IChromeAPI } from "../interfaces";
 
 const Header = styled.header`
@@ -151,9 +152,9 @@ const SaveBookmarkMenu: React.FC = () => {
 
   const [url, setUrl] = useState("");
   const [title, setTitle] = useState("");
-
   const { add } = useFirestoreCollection("pages", false);
   const [sendBtnStatus, setSendBtnStatus] = useState(true);
+  const { addTags } = useFirestoreCollectionTags(false);
   const sendBookmark = () => {
     if (process.env.REACT_APP_IS_EXTENSION) {
       add({
@@ -164,15 +165,7 @@ const SaveBookmarkMenu: React.FC = () => {
         url,
         archived: false,
       });
-      console.log(
-        JSON.stringify({
-          interest,
-          tags: tags.split(", "),
-          time,
-          title,
-          url,
-        })
-      );
+      addTags(tags.split(", "));
     } else console.log("You should go to extension to add pages");
     setSendBtnStatus(false);
   };

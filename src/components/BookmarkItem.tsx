@@ -3,6 +3,7 @@ import styled from "styled-components";
 import TimeIcon from "./TimeIcon";
 import InterestIcon from "./InterestIcon";
 import { BookmarkDocument } from "../interfaces";
+import useFirestoreCollectionTags from "./Firebase/useFirestoreCollectionTags";
 
 const Article = styled.article`
   width: 100%;
@@ -13,7 +14,7 @@ const Article = styled.article`
 
 const Section = styled.section`
   width: 100%;
-  height: 20px;
+  height: 24px;
   display: flex;
 
   justify-content: space-between;
@@ -87,8 +88,11 @@ const Bookmark: React.FC<BookmarkItemProps> = (props) => {
   const { url, title, interest, time, tags } = props.pageInfo;
   const CloseButtonIcon = props.closeButtonIcon;
 
+  const { removeTags } = useFirestoreCollectionTags(false);
+
   const closePage = () => {
     props.close(props.pageId, props.pageInfo);
+    removeTags(tags);
   };
   return (
     <Article>

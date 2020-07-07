@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import FilterItem from "./FilterItem";
+import useFirestoreCollectionTags from "./Firebase/useFirestoreCollectionTags";
 
 const Wrapper = styled.nav`
   width: 300px;
@@ -30,16 +31,11 @@ const ClearFiltersButton = styled.button`
 `;
 
 interface FilterListProps {
-  documents: { data: () => { tags: string } }[];
-  query: any;
+  query: Function;
   collection: { where: Function };
 }
 
-const FilterList: React.FC<FilterListProps> = ({
-  documents,
-  query,
-  collection,
-}) => {
+const FilterList: React.FC<FilterListProps> = ({ query, collection }) => {
   const [timeFilter, setTimeFilter] = useState("");
   const [interestFilter, setInterestFilter] = useState("");
   const [tagsFilter, setTagsFilter] = useState("");
@@ -47,7 +43,6 @@ const FilterList: React.FC<FilterListProps> = ({
   useEffect(() => {
     let newCollection = collection;
     if (timeFilter) {
-      debugger;
       newCollection = newCollection.where(
         "time",
         "==",
@@ -77,12 +72,7 @@ const FilterList: React.FC<FilterListProps> = ({
     setTagsFilter("");
   };
 
-  const documentTags: string[] = [];
-  documents.map(
-    (document) =>
-      document.data().tags.indexOf("") === -1 &&
-      documentTags.push(document.data().tags)
-  );
+  const { documentTags } = useFirestoreCollectionTags(true);
 
   return (
     <>
@@ -101,7 +91,7 @@ const FilterList: React.FC<FilterListProps> = ({
         />
         <FilterItem
           filterName="Tags"
-          filterUnits={documentTags}
+          filterUnits={Object.keys(documentTags)}
           setFilter={setTagsFilter}
           currentFilter={tagsFilter}
         />
