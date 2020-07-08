@@ -1,7 +1,7 @@
 import React, { SetStateAction } from "react";
-import { ReactComponent as SmallInterest } from "../img/small_interest.svg";
-import { ReactComponent as MediumInterest } from "../img/medium_interest.svg";
-import { ReactComponent as HighInterest } from "../img/high_interest.svg";
+import { ReactComponent as SmallInterest } from "../../img/small_interest.svg";
+import { ReactComponent as MediumInterest } from "../../img/medium_interest.svg";
+import { ReactComponent as HighInterest } from "../../img/high_interest.svg";
 
 interface InterestIconProps {
   status: string;

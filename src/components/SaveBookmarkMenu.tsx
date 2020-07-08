@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import TimeIcon from "./TimeIcon";
-import InterestIcon from "./InterestIcon";
+import TimeIcon from "./Icons/TimeIcon";
+import InterestIcon from "./Icons/InterestIcon";
 import useFirestoreCollection from "./Firebase/useFirestoreCollection";
 import useFirestoreCollectionTags from "./Firebase/useFirestoreCollectionTags";
 import { IChromeAPI } from "../interfaces";
@@ -142,12 +142,12 @@ const SaveBookmarkMenu: React.FC = () => {
     if (process.env.REACT_APP_IS_EXTENSION) {
       chrome.tabs.query(
         { active: true, lastFocusedWindow: true },
-        (tabs: Array<any>) => {
+        (tabs: { url: string; title: string }[]) => {
           setUrl(tabs[0].url);
           setTitle(tabs[0].title);
         }
       );
-    } else console.log("You should go to extension to add pages");
+    } else console.log("You should go to the extension to add pages");
   });
 
   const [url, setUrl] = useState("");
@@ -157,16 +157,18 @@ const SaveBookmarkMenu: React.FC = () => {
   const { addTags } = useFirestoreCollectionTags(false);
   const sendBookmark = () => {
     if (process.env.REACT_APP_IS_EXTENSION) {
-      add({
-        interest,
-        tags: tags.split(", "),
-        time,
-        title,
-        url,
-        archived: false,
-      });
-      addTags(tags.split(", "));
-    } else console.log("You should go to extension to add pages");
+      (async () => {
+        await add({
+          interest,
+          tags: tags.split(", "),
+          time,
+          title,
+          url,
+          archived: false,
+        });
+        if (tags !== "") await addTags(tags.split(", "));
+      })().catch((error) => alert(error));
+    } else console.log("You should go to the extension to add pages");
     setSendBtnStatus(false);
   };
 

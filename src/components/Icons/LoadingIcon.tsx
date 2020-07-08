@@ -1,4 +1,4 @@
-import React from "react";
+import React, { CSSProperties } from "react";
 import styled, { keyframes } from "styled-components";
 
 const commonStyle = {
@@ -99,29 +99,22 @@ const Con = styled.div<ConProps>`
 `;
 
 interface LoadingProps {
-  style?:
-    | {
-        margin: string;
-        position: string;
-        left: number;
-        right: number;
-        top: number;
-        bottom: number;
-      }
-    | undefined;
   color: string;
   speed: number;
-  size?: string | undefined;
+  size?: string;
 }
 
 const LoadingIcon: React.FC<LoadingProps> = ({
-  style = commonStyle as any,
   color,
   speed,
   size = "default",
 }) => {
   return (
-    <LoadingContainer style={style} color={color} size={size}>
+    <LoadingContainer
+      style={commonStyle as CSSProperties}
+      color={color}
+      size={size}
+    >
       <Center color={color} />
       <Con speed={speed}>
         <ItemFirst color={color} size={size} />

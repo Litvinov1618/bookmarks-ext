@@ -3,7 +3,7 @@ import firebase from "firebase";
 
 const useFirestoreCollectionTags = (immediate = true) => {
   const [documentTags, setDocumentTags] = useState<any>({});
-  const tagsRef = firebase.firestore().collection("tags").doc("tagList");
+  const tagsRef = firebase.firestore().collection("app").doc("tags");
 
   useEffect(() => {
     if (immediate) {
@@ -21,29 +21,30 @@ const useFirestoreCollectionTags = (immediate = true) => {
   const addTags = (pageTags: string[]) => {
     tagsRef.get().then((doc) => {
       const docTags = doc.data();
-      if (pageTags.length === 1 && pageTags[0] !== "") {
-        pageTags.forEach((pageTag: string) => {
-          if (docTags && docTags.hasOwnProperty(pageTag)) {
-            tagsRef.update({ [pageTag]: ++docTags[pageTag] });
-          } else tagsRef.update({ [pageTag]: 1 });
+      if (docTags) {
+        const newCounters: { [tagName: string]: number } = {};
+        pageTags.forEach((tag: string) => {
+          if (docTags.hasOwnProperty(tag)) newCounters[tag] = docTags[tag] + 1;
+          else newCounters[tag] = 1;
         });
-      }
+        return tagsRef.update(newCounters);
+      } else throw new Error("Document doesn't exist");
     });
   };
 
   const removeTags = (pageTags: string[]) => {
     tagsRef.get().then((doc) => {
       const docTags = doc.data();
-      if (pageTags.length === 1 && pageTags[0] !== "") {
-        pageTags.forEach((pageTag: string) => {
-          if (docTags && docTags[pageTag] > 1) {
-            tagsRef.update({ [pageTag]: --docTags[pageTag] });
-          } else
-            tagsRef.update({
-              [pageTag]: firebase.firestore.FieldValue.delete(),
-            });
+      if (docTags) {
+        const newCounters: {
+          [tagName: string]: number | firebase.firestore.FieldValue;
+        } = {};
+        pageTags.forEach((tag: string) => {
+          if (docTags[tag] > 1) newCounters[tag] = docTags[tag] - 1;
+          else newCounters[tag] = firebase.firestore.FieldValue.delete();
         });
-      }
+        return tagsRef.update(newCounters);
+      } else throw new Error("Document doesn't exist");
     });
   };
 

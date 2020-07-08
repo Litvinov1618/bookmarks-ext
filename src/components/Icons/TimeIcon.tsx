@@ -1,7 +1,7 @@
 import React from "react";
-import { ReactComponent as SmallTime } from "../img/small_time.svg";
-import { ReactComponent as MediumTime } from "../img/medium_time.svg";
-import { ReactComponent as HighTime } from "../img/high_time.svg";
+import { ReactComponent as SmallTime } from "../../img/small_time.svg";
+import { ReactComponent as MediumTime } from "../../img/medium_time.svg";
+import { ReactComponent as HighTime } from "../../img/high_time.svg";
 
 interface TimeIconProps {
   status: string;

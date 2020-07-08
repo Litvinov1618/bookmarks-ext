@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import TimeIcon from "./TimeIcon";
-import InterestIcon from "./InterestIcon";
+import TimeIcon from "./Icons/TimeIcon";
+import InterestIcon from "./Icons/InterestIcon";
 import { BookmarkDocument } from "../interfaces";
 import useFirestoreCollectionTags from "./Firebase/useFirestoreCollectionTags";
 
@@ -90,9 +90,9 @@ const Bookmark: React.FC<BookmarkItemProps> = (props) => {
 
   const { removeTags } = useFirestoreCollectionTags(false);
 
-  const closePage = () => {
-    props.close(props.pageId, props.pageInfo);
-    removeTags(tags);
+  const closePage = async () => {
+    await props.close(props.pageId, props.pageInfo);
+    if (tags.join() !== "") await removeTags(tags);
   };
   return (
     <Article>

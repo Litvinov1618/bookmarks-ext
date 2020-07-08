@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import InterestIcon from "./InterestIcon";
-import TimeIcon from "./TimeIcon";
+import InterestIcon from "./Icons/InterestIcon";
+import TimeIcon from "./Icons/TimeIcon";
 
 const Filter = styled.div`
   width: 90px;

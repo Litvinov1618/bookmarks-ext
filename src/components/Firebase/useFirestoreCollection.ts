@@ -25,7 +25,7 @@ const useFirestoreCollection = (collectionName = "pages", immediate = true) => {
   }, [query, immediate]);
 
   const add = (pageInfo: BookmarkDocument) => {
-    collection.add(pageInfo);
+    return collection.add(pageInfo);
   };
 
   const remove = (bookmarkId: string) => {
