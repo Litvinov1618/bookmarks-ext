@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import firebase from "./firebase";
 import { BookmarkDocument } from "../../interfaces";
+import useFirestoreCollectionTags from "./useFirestoreCollectionTags";
 
 const useFirestoreCollection = (collectionName = "pages", immediate = true) => {
   /** @type {[Array<firebase.firestore.QueryDocumentSnapshot<firebase.firestore.DocumentData>>, React.Dispatch<React.SetStateAction<Array<firebase.firestore.DocumentData>>>]} */
@@ -24,17 +25,32 @@ const useFirestoreCollection = (collectionName = "pages", immediate = true) => {
       );
   }, [query, immediate]);
 
-  const add = (pageInfo: BookmarkDocument) => {
-    return collection.add(pageInfo);
+  const add = async (pageInfo: BookmarkDocument) => {
+    return await collection
+      .add(pageInfo)
+      .then(() => console.log("Page Added!"))
+      .catch((error) => alert(error));
   };
 
-  const remove = (bookmarkId: string) => {
-    collection.doc(bookmarkId).delete();
+  const remove = async (bookmarkId: string) => {
+    return await collection
+      .doc(bookmarkId)
+      .delete()
+      .then(() => console.log("Page Deleted!"))
+      .catch((error) => alert(error));
   };
 
-  const archive = (pageId: string, pageInfo: BookmarkDocument) => {
-    pageInfo.archived = true;
-    collection.doc(pageId).update(pageInfo);
+  const { removeTags } = useFirestoreCollectionTags(false);
+  const archive = async (pageId: string, pageInfo: BookmarkDocument) => {
+    return firebase
+      .firestore()
+      .runTransaction(async () => {
+        pageInfo.archived = true;
+        await collection.doc(pageId).update(pageInfo);
+        if (pageInfo.tags.join() !== "") await removeTags(pageInfo.tags);
+      })
+      .then(() => console.log("Transaction completed!"))
+      .catch((error) => console.log("Transaction failed with error: ", error));
   };
 
   return {

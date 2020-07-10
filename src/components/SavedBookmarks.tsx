@@ -1,7 +1,7 @@
 import React from "react";
 import FilterList from "./FilterList";
 import BookmarkList from "./BookmarkList";
-import useFirestoreCollection from "./Firebase/useFirestoreCollection";
+import useFirestoreCollection from "./Firebase/useFirestoreCollectionPages";
 import LoadingIcon from "./Icons/LoadingIcon";
 
 const SavedBookmarks = () => {

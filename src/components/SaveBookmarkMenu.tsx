@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import TimeIcon from "./Icons/TimeIcon";
 import InterestIcon from "./Icons/InterestIcon";
-import useFirestoreCollection from "./Firebase/useFirestoreCollection";
+import useFirestoreCollection from "./Firebase/useFirestoreCollectionPages";
 import useFirestoreCollectionTags from "./Firebase/useFirestoreCollectionTags";
+import firebase from "firebase";
 import { IChromeAPI } from "../interfaces";
 
 const Header = styled.header`
@@ -157,17 +158,23 @@ const SaveBookmarkMenu: React.FC = () => {
   const { addTags } = useFirestoreCollectionTags(false);
   const sendBookmark = () => {
     if (process.env.REACT_APP_IS_EXTENSION) {
-      (async () => {
-        await add({
-          interest,
-          tags: tags.split(", "),
-          time,
-          title,
-          url,
-          archived: false,
-        });
-        if (tags !== "") await addTags(tags.split(", "));
-      })().catch((error) => alert(error));
+      firebase
+        .firestore()
+        .runTransaction(async () => {
+          await add({
+            interest,
+            tags: tags.split(", "),
+            time,
+            title,
+            url,
+            archived: false,
+          });
+          if (tags !== "") await addTags(tags.split(", "));
+        })
+        .then(() => console.log("Transaction completed!"))
+        .catch((error) =>
+          console.log("Transaction failed with error: ", error)
+        );
     } else console.log("You should go to the extension to add pages");
     setSendBtnStatus(false);
   };
