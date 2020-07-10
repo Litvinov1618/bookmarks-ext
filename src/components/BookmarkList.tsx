@@ -30,19 +30,19 @@ const ArchivedPagesButton = styled.button`
 `;
 
 interface BookmarkListProps {
-  documents: { data: () => BookmarkDocument; id: string }[];
-  archive: (pageId: string, pageInfo: BookmarkDocument) => void;
-  remove: (pageId: string) => void;
+  documentPages: { data: () => BookmarkDocument; id: string }[];
+  archivePage: (pageId: string, pageInfo: BookmarkDocument) => void;
+  removePage: (pageId: string) => void;
 }
 
 const BookmarkList: React.FC<BookmarkListProps> = ({
-  documents,
-  archive,
-  remove,
+  documentPages,
+  archivePage,
+  removePage,
 }) => {
   const activePages: { data: () => BookmarkDocument; id: string }[] = [];
   const archivedPages: { data: () => BookmarkDocument; id: string }[] = [];
-  documents.forEach((document) => {
+  documentPages.forEach((document) => {
     if (document.data().archived === false) activePages.push(document);
     else archivedPages.push(document);
   });
@@ -59,7 +59,7 @@ const BookmarkList: React.FC<BookmarkListProps> = ({
             pageInfo={page.data()}
             key={page.id}
             pageId={page.id}
-            close={archive}
+            close={archivePage}
             closeButtonIcon={DoneButton}
           />
         ))}
@@ -72,7 +72,7 @@ const BookmarkList: React.FC<BookmarkListProps> = ({
               pageInfo={page.data()}
               key={page.id}
               pageId={page.id}
-              close={remove}
+              close={removePage}
               closeButtonIcon={DeleteButton}
             />
           ))}

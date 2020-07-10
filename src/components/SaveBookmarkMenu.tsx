@@ -153,15 +153,15 @@ const SaveBookmarkMenu: React.FC = () => {
 
   const [url, setUrl] = useState("");
   const [title, setTitle] = useState("");
-  const { add } = useFirestoreCollection("pages", false);
+  const { addPage } = useFirestoreCollection("pages", false);
   const [sendBtnStatus, setSendBtnStatus] = useState(true);
-  const { addTags } = useFirestoreCollectionTags(false);
+  const { addTag } = useFirestoreCollectionTags(false);
   const sendBookmark = () => {
     if (process.env.REACT_APP_IS_EXTENSION) {
       firebase
         .firestore()
         .runTransaction(async () => {
-          await add({
+          await addPage({
             interest,
             tags: tags.split(", "),
             time,
@@ -169,7 +169,7 @@ const SaveBookmarkMenu: React.FC = () => {
             url,
             archived: false,
           });
-          if (tags !== "") await addTags(tags.split(", "));
+          if (tags !== "") await addTag(tags.split(", "));
         })
         .then(() => console.log("Transaction completed!"))
         .catch((error) =>

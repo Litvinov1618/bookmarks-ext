@@ -18,7 +18,7 @@ const useFirestoreCollectionTags = (immediate = true) => {
     }
   });
 
-  const addTags = async (pageTags: string[]) => {
+  const addTag = async (pageTags: string[]) => {
     return await tagsRef.get().then((doc) => {
       const docTags = doc.data();
       if (docTags) {
@@ -32,7 +32,7 @@ const useFirestoreCollectionTags = (immediate = true) => {
     });
   };
 
-  const removeTags = async (pageTags: string[]) => {
+  const removeTag = async (pageTags: string[]) => {
     return await tagsRef.get().then((doc) => {
       const docTags = doc.data();
       if (docTags) {
@@ -50,8 +50,8 @@ const useFirestoreCollectionTags = (immediate = true) => {
 
   return {
     documentTags,
-    addTags,
-    removeTags,
+    addTag,
+    removeTag,
   };
 };
 

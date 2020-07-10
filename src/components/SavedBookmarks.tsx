@@ -6,12 +6,12 @@ import LoadingIcon from "./Icons/LoadingIcon";
 
 const SavedBookmarks = () => {
   const {
-    documents,
+    documentPages,
     ready,
     query,
     collection,
-    archive,
-    remove,
+    archivePage,
+    removePage,
   } = useFirestoreCollection("pages");
 
   return (
@@ -21,9 +21,9 @@ const SavedBookmarks = () => {
         <>
           <FilterList query={query} collection={collection} />
           <BookmarkList
-            documents={documents}
-            archive={archive}
-            remove={remove}
+            documentPages={documentPages}
+            archivePage={archivePage}
+            removePage={removePage}
           />
         </>
       )}
