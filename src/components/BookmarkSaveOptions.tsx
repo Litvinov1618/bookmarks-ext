@@ -157,7 +157,7 @@ const SaveBookmarkMenu: React.FC = () => {
   const [url, setUrl] = useState("");
   const [title, setTitle] = useState("");
   const { addPage } = useFirestoreCollection("pages", false);
-  const [sendBtnStatus, setSendBtnStatus] = useState(true);
+  const [sendButtonDisabled, setSendButtonDisabled] = useState(false);
   const { addTag } = useFirestoreCollectionTags(false);
   const sendBookmark = () => {
     if (isExtension) {
@@ -179,7 +179,7 @@ const SaveBookmarkMenu: React.FC = () => {
           console.log("Transaction failed with error: ", error)
         );
     } else console.log("You should go to the extension to add pages");
-    setSendBtnStatus(false);
+    setSendButtonDisabled(true);
   };
 
   return (
@@ -233,7 +233,7 @@ const SaveBookmarkMenu: React.FC = () => {
           </InputGroup>
           <InputGroup>
             <TagsArea placeholder="Tags" onChange={handleTags} value={tags} />
-            <Button disabled={!sendBtnStatus} onClick={sendBookmark}>
+            <Button disabled={sendButtonDisabled} onClick={sendBookmark}>
               Send
             </Button>
           </InputGroup>
