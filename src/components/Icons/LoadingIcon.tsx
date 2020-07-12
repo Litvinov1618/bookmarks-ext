@@ -99,14 +99,14 @@ const Con = styled.div<ConProps>`
 `;
 
 interface LoadingProps {
-  color: string;
-  speed: number;
+  color?: string;
+  speed?: number;
   size?: string;
 }
 
 const LoadingIcon: React.FC<LoadingProps> = ({
-  color,
-  speed,
+  color = "#e95656",
+  speed = 1,
   size = "default",
 }) => {
   return (

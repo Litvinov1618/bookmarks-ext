@@ -3,11 +3,13 @@ import styled from "styled-components";
 import InterestIcon from "./Icons/InterestIcon";
 import TimeIcon from "./Icons/TimeIcon";
 
+const mainColor = process.env.REACT_APP_MAIN_COLOR;
+
 const Filter = styled.div`
   width: 90px;
   background-color: white;
   z-index: 9999;
-  border: 1px solid #e95656;
+  border: 1px solid ${mainColor};
   box-sizing: border-box;
   border-radius: 5px;
   position: absolute;

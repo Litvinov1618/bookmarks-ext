@@ -11,6 +11,21 @@ const Article = styled.article`
   margin-bottom: 10px;
 `;
 
+const CloseButtonWrapper = styled.div`
+  display: none;
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  ${Article}:hover & {
+    display: inline;
+  }
+`;
+
 const Section = styled.section`
   width: 100%;
   height: 24px;
@@ -35,9 +50,11 @@ const Title = styled.a`
   max-width: 85%;
 `;
 
+const mainColor = process.env.REACT_APP_MAIN_COLOR;
+
 const Hr = styled.div`
   height: 1px;
-  background-color: #e95656;
+  background-color: ${mainColor};
 `;
 
 const Wrapper = styled.div`
@@ -61,37 +78,16 @@ const Tags = styled.p`
   white-space: pre-wrap;
 `;
 
-const CloseButtonWrapper = styled.div`
-  display: none;
-  position: absolute;
-  bottom: 0px;
-  right: 0px;
-
-  &:hover {
-    cursor: pointer;
-  }
-
-  ${Article}:hover & {
-    display: inline;
-  }
-`;
-
 interface BookmarkItemProps {
   pageInfo: BookmarkDocument;
   pageId: string;
-  close: Function;
+  close: (pageId: string, pageInfo: BookmarkDocument) => void;
   closeButtonIcon: Function;
 }
 
 const Bookmark: React.FC<BookmarkItemProps> = (props) => {
   const { url, title, interest, time, tags } = props.pageInfo;
   const CloseButtonIcon = props.closeButtonIcon;
-  const closePage = () => {
-    props
-      .close(props.pageId, props.pageInfo)
-      .then(() => console.log("Page closed"))
-      .catch((error: any) => console.error(error));
-  };
   return (
     <Article>
       <Section>
@@ -108,7 +104,9 @@ const Bookmark: React.FC<BookmarkItemProps> = (props) => {
         <Link>{url.match(/\/{2}[\w.\\-]+/)![0].slice(2)}</Link>
         <Tags>{tags && tags.join(", ")}</Tags>
       </Wrapper>
-      <CloseButtonWrapper onClick={closePage}>
+      <CloseButtonWrapper
+        onClick={() => props.close(props.pageId, props.pageInfo)}
+      >
         <CloseButtonIcon />
       </CloseButtonWrapper>
     </Article>

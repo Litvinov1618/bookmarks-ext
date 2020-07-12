@@ -18,8 +18,8 @@ const useFirestoreCollectionTags = (immediate = true) => {
     }
   });
 
-  const addTag = async (pageTags: string[]) => {
-    return await tagsRef.get().then((doc) => {
+  const addTag = (pageTags: string[]) => {
+    return tagsRef.get().then((doc) => {
       const docTags = doc.data();
       if (docTags) {
         const newCounters: { [tagName: string]: number } = {};
@@ -32,8 +32,8 @@ const useFirestoreCollectionTags = (immediate = true) => {
     });
   };
 
-  const removeTag = async (pageTags: string[]) => {
-    return await tagsRef.get().then((doc) => {
+  const removeTag = (pageTags: string[]) => {
+    return tagsRef.get().then((doc) => {
       const docTags = doc.data();
       if (docTags) {
         const newCounters: {

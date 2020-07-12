@@ -7,8 +7,10 @@ import useFirestoreCollectionTags from "./Firebase/useFirestoreCollectionTags";
 import firebase from "firebase";
 import { IChromeAPI } from "../interfaces";
 
+const mainColor = process.env.REACT_APP_MAIN_COLOR;
+
 const Header = styled.header`
-  border: 2px solid #e95656;
+  border: 2px solid ${mainColor};
   box-sizing: border-box;
   border-radius: 20px;
 
@@ -39,7 +41,7 @@ const Label = styled.label`
 `;
 
 const TagsArea = styled.textarea`
-  border: 1px solid #e95656;
+  border: 1px solid ${mainColor};
   box-sizing: border-box;
   border-radius: 5px;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -67,7 +69,7 @@ const Button = styled.button`
   margin-left: 23px;
   padding: 5px;
 
-  border: 1px solid #e95656;
+  border: 1px solid ${mainColor};
   box-sizing: border-box;
   border-radius: 5px;
   background-color: white;
@@ -101,7 +103,7 @@ const IconWrapper = styled.button<IconWrapperProps>`
   padding: 4px 4px 2px 4px;
 
   border: 1px solid transparent;
-  border-color: ${(props) => props.selected && "#e95656"};
+  border-color: ${(props) => props.selected && mainColor};
   border-radius: 15px;
   font: inherit;
   color: inherit;
@@ -110,7 +112,7 @@ const IconWrapper = styled.button<IconWrapperProps>`
 
   &:hover {
     cursor: pointer;
-    border-color: #e95656;
+    border-color: ${mainColor};
   }
 
   &:active {
@@ -139,8 +141,9 @@ const SaveBookmarkMenu: React.FC = () => {
     setTags(event.target.value);
   };
 
+  const isExtension = process.env.REACT_APP_IS_EXTENSION;
   useEffect(() => {
-    if (process.env.REACT_APP_IS_EXTENSION) {
+    if (isExtension) {
       chrome.tabs.query(
         { active: true, lastFocusedWindow: true },
         (tabs: { url: string; title: string }[]) => {
@@ -157,7 +160,7 @@ const SaveBookmarkMenu: React.FC = () => {
   const [sendBtnStatus, setSendBtnStatus] = useState(true);
   const { addTag } = useFirestoreCollectionTags(false);
   const sendBookmark = () => {
-    if (process.env.REACT_APP_IS_EXTENSION) {
+    if (isExtension) {
       firebase
         .firestore()
         .runTransaction(async () => {
