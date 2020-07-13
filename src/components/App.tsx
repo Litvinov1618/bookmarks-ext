@@ -13,13 +13,11 @@ const Wrapper = styled.div`
   align-items: center;
 `;
 
-const App: React.FC = () => {
-  return (
-    <Wrapper>
-      <SavePageMenu />
-      <SavedBookmarks />
-    </Wrapper>
-  );
-};
+const App: React.FC = () => (
+  <Wrapper>
+    <SavePageMenu />
+    <SavedBookmarks />
+  </Wrapper>
+);
 
 export default App;

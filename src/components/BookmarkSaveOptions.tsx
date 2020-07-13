@@ -2,11 +2,9 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import TimeIcon from "./Icons/TimeIcon";
 import InterestIcon from "./Icons/InterestIcon";
-import useFirestoreCollection from "./Firebase/useFirestoreCollectionPages";
-import useFirestoreCollectionTags from "./Firebase/useFirestoreCollectionTags";
-import firebase from "firebase";
-import { IChromeAPI } from "../interfaces";
+import useFirestorePagesCollection from "./Firebase/useFirestorePagesCollection";
 
+const isExtension = process.env.REACT_APP_IS_EXTENSION;
 const mainColor = process.env.REACT_APP_MAIN_COLOR;
 
 const Header = styled.header`
@@ -121,65 +119,94 @@ const IconWrapper = styled.button<IconWrapperProps>`
   }
 `;
 
-declare const chrome: IChromeAPI;
 
-const SaveBookmarkMenu: React.FC = () => {
-  const [time, setTime] = useState("");
-  const handleTime = (str: string) => {
-    setTime(str);
-  };
+interface BookmarkOptions {
+  time: string;
+  interest: string;
+  tags: string;
+}
 
-  const [interest, setInterest] = useState("");
-  const handleInterest = (str: string) => {
-    setInterest(str);
-  };
+interface BookmarkOptionsPatch {
+  time?: string;
+  interest?: string;
+  tags?: string;
+}
 
-  const [tags, setTags] = useState("");
-  const handleTags = (event: {
-    target: { value: React.SetStateAction<string> };
-  }) => {
-    setTags(event.target.value);
-  };
-
-  const isExtension = process.env.REACT_APP_IS_EXTENSION;
-  useEffect(() => {
-    if (isExtension) {
-      chrome.tabs.query(
-        { active: true, lastFocusedWindow: true },
-        (tabs: { url: string; title: string }[]) => {
-          setUrl(tabs[0].url);
-          setTitle(tabs[0].title);
-        }
-      );
-    } else console.log("You should go to the extension to add pages");
+const useBookmarkOptions = (): [BookmarkOptions, (patch: BookmarkOptionsPatch) => void] => {
+  const [options, setOptions] = useState({
+    time: '',
+    interest: '',
+    tags: ''
   });
 
-  const [url, setUrl] = useState("");
-  const [title, setTitle] = useState("");
-  const { addPage } = useFirestoreCollection("pages", false);
+  const update = (optionsPatch: { time?: string, tags?: string, interest?: string }) =>
+    setOptions(Object.assign({}, options, optionsPatch));
+
+  return [options, update];
+};
+
+const useActiveTabDetails = () => {
+  const [details, set] = useState({ url: '', title: '' });
+
+  useEffect(() => {
+    if (!isExtension) {
+      console.log("You should go to the extension to add pages");
+      return;
+    }
+
+    chrome.tabs.query(
+      { active: true, lastFocusedWindow: true },
+      (tabs) => {
+        set({
+          url: tabs[0].url || '',
+          title: tabs[0].title || ''
+        });
+      }
+    );
+  });
+
+  return details;
+};
+
+const InterestOption = ({ interest, selected, onSelect }: { interest: string, selected: boolean, onSelect: () => void }) => (
+  <IconWrapper selected={selected} onClick={onSelect}>
+    <InterestIcon status={interest} />
+  </IconWrapper>
+);
+const InterestSelect = ({ interest, onSelect }: { interest: string, onSelect: (interest: string) => void }) => (
+  <InputWrapper>
+    <Label>Interest:</Label>
+    <InterestOption interest="small" selected={interest === 'small'} onSelect={() => onSelect('small')} />
+    <InterestOption interest="medium" selected={interest === 'medium'} onSelect={() => onSelect('medium')} />
+    <InterestOption interest="high" selected={interest === 'high'} onSelect={() => onSelect('high')} />
+  </InputWrapper>
+);
+
+const SaveBookmarkMenu: React.FC = () => {
+  const [options, updateOptions] = useBookmarkOptions();
+  const handleTime = (time: string) => updateOptions({ time });
+  const handleTags = (tags: string) => updateOptions({ tags });
+
+  const { url, title } = useActiveTabDetails();
+
+  const { addPage } = useFirestorePagesCollection("pages", false);
   const [sendButtonDisabled, setSendButtonDisabled] = useState(false);
-  const { addTag } = useFirestoreCollectionTags(false);
   const sendBookmark = () => {
-    if (isExtension) {
-      firebase
-        .firestore()
-        .runTransaction(async () => {
-          await addPage({
-            interest,
-            tags: tags.split(", "),
-            time,
-            title,
-            url,
-            archived: false,
-          });
-          if (tags !== "") await addTag(tags.split(", "));
-        })
-        .then(() => console.log("Transaction completed!"))
-        .catch((error) =>
-          console.log("Transaction failed with error: ", error)
-        );
-    } else console.log("You should go to the extension to add pages");
     setSendButtonDisabled(true);
+
+    if (!isExtension) {
+      console.log("You should go to the extension to add pages");
+      return;
+    }
+
+    return addPage({
+      interest: options.interest,
+      tags: options.tags.split(", "),
+      time: options.time,
+      title,
+      url,
+      archived: false,
+    });
   };
 
   return (
@@ -191,48 +218,28 @@ const SaveBookmarkMenu: React.FC = () => {
             <InputWrapper>
               <Label>Read Time:</Label>
               <IconWrapper
-                selected={time === "small"}
+                selected={options.time === "small"}
                 onClick={() => handleTime("small")}
               >
                 <TimeIcon status="small" />
               </IconWrapper>
               <IconWrapper
-                selected={time === "medium"}
+                selected={options.time === "medium"}
                 onClick={() => handleTime("medium")}
               >
                 <TimeIcon status="medium" />
               </IconWrapper>
               <IconWrapper
-                selected={time === "high"}
+                selected={options.time === "high"}
                 onClick={() => handleTime("high")}
               >
                 <TimeIcon status="high" />
               </IconWrapper>
             </InputWrapper>
-            <InputWrapper>
-              <Label>Interest:</Label>
-              <IconWrapper
-                selected={interest === "small"}
-                onClick={() => handleInterest("small")}
-              >
-                <InterestIcon status="small" />
-              </IconWrapper>
-              <IconWrapper
-                selected={interest === "medium"}
-                onClick={() => handleInterest("medium")}
-              >
-                <InterestIcon status="medium" />
-              </IconWrapper>
-              <IconWrapper
-                selected={interest === "high"}
-                onClick={() => handleInterest("high")}
-              >
-                <InterestIcon status="high" />
-              </IconWrapper>
-            </InputWrapper>
+            <InterestSelect interest={options.interest} onSelect={interest => updateOptions({ interest })} />
           </InputGroup>
           <InputGroup>
-            <TagsArea placeholder="Tags" onChange={handleTags} value={tags} />
+            <TagsArea placeholder="Tags" onChange={e => handleTags(e.target.value)} value={options.tags} />
             <Button disabled={sendButtonDisabled} onClick={sendBookmark}>
               Send
             </Button>

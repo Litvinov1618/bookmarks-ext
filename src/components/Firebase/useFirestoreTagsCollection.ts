@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import firebase from "firebase";
 
-const useFirestoreCollectionTags = (immediate = true) => {
+const useFirestoreTagsCollection = (immediate = true) => {
   const [documentTags, setDocumentTags] = useState<any>({});
   const tagsRef = firebase.firestore().collection("app").doc("tags");
 
@@ -55,4 +55,4 @@ const useFirestoreCollectionTags = (immediate = true) => {
   };
 };
 
-export default useFirestoreCollectionTags;
+export default useFirestoreTagsCollection;

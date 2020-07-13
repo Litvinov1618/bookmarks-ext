@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import FilterItem from "./FilterItem";
-import useFirestoreCollectionTags from "./Firebase/useFirestoreCollectionTags";
+import useFirestoreTagsCollection from "./Firebase/useFirestoreTagsCollection";
 
 const Wrapper = styled.nav`
   width: 300px;
@@ -72,7 +72,7 @@ const FilterList: React.FC<FilterListProps> = ({ query, collection }) => {
     setTagsFilter("");
   };
 
-  const { documentTags } = useFirestoreCollectionTags(true);
+  const { documentTags } = useFirestoreTagsCollection(true);
 
   return (
     <>

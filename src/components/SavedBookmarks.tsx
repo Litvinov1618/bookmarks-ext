@@ -1,8 +1,8 @@
 import React from "react";
 import FilterList from "./FiltersList";
 import BookmarkList from "./BookmarksList";
-import useFirestoreCollection from "./Firebase/useFirestoreCollectionPages";
-import useFirestoreCollectionTags from "./Firebase/useFirestoreCollectionTags";
+import useFirestorePagesCollection from "./Firebase/useFirestorePagesCollection";
+import useFirestoreTagsCollection from "./Firebase/useFirestoreTagsCollection";
 import LoadingIcon from "./Icons/LoadingIcon";
 import { BookmarkDocument } from "../interfaces";
 import firebase from "./Firebase/firebase";
@@ -17,9 +17,9 @@ const SavedBookmarks = () => {
     collection,
     archivePage,
     removePage,
-  } = useFirestoreCollection("pages");
+  } = useFirestorePagesCollection("pages");
 
-  const { removeTag } = useFirestoreCollectionTags(false);
+  const { removeTag } = useFirestoreTagsCollection(false);
   const archivePageAndDeleteTags = (
     pageId: string,
     pageInfo: BookmarkDocument
@@ -35,19 +35,16 @@ const SavedBookmarks = () => {
       .catch((error) => alert(error));
   };
 
+  if (!ready) return <LoadingIcon speed={1} color={mainColor} />;
+
   return (
     <>
-      {!ready && <LoadingIcon speed={1} color={mainColor} />}
-      {ready && (
-        <>
-          <FilterList query={query} collection={collection} />
-          <BookmarkList
-            documentPages={documentPages}
-            archivePage={archivePageAndDeleteTags}
-            removePage={removePage}
-          />
-        </>
-      )}
+      <FilterList query={query} collection={collection} />
+      <BookmarkList
+        documentPages={documentPages}
+        archivePage={archivePageAndDeleteTags}
+        removePage={removePage}
+      />
     </>
   );
 };

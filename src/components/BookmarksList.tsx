@@ -46,11 +46,13 @@ const BookmarkList: React.FC<BookmarkListProps> = ({
     if (document.data().archived === false) activePages.push(document);
     else archivedPages.push(document);
   });
+
   const [showArchivedPages, setShowArchivedPages] = useState(false);
   const handleClick = () => {
     if (showArchivedPages) setShowArchivedPages(false);
     else setShowArchivedPages(true);
   };
+
   return (
     <>
       <Wrapper>
