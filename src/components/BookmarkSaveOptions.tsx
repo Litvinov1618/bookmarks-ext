@@ -107,7 +107,9 @@ const SaveBookmarkMenu: React.FC = () => {
       title,
       url,
       archived: false,
-    });
+    })
+      .then(() => updateOptions({ time: "", interest: "", tags: "" }))
+      .catch((error) => alert(error));
   };
 
   return (
