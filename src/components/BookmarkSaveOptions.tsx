@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import InterestSelect from "./PresentationComponents/InterestSelect";
 import TimeSelect from "./PresentationComponents/TimeSelect";
 import useFirestorePagesCollection from "./Firebase/useFirestorePagesCollection";
+import useActiveTabDetails from "./Hooks/useActiveTabDetails";
+import useBookmarkOptions from "./Hooks/useBookmarkOptions";
 
 const isExtension = process.env.REACT_APP_IS_EXTENSION;
 const mainColor = process.env.REACT_APP_MAIN_COLOR;
@@ -82,59 +84,8 @@ const InputGroup = styled.div`
   display: flex;
 `;
 
-interface BookmarkOptions {
-  time: string;
-  interest: string;
-  tags: string;
-}
-
-interface BookmarkOptionsPatch {
-  time?: string;
-  interest?: string;
-  tags?: string;
-}
-
-const useBookmarkOptions = (): [
-  BookmarkOptions,
-  (patch: BookmarkOptionsPatch) => void
-] => {
-  const [options, setOptions] = useState({
-    time: "",
-    interest: "",
-    tags: "",
-  });
-
-  const update = (optionsPatch: {
-    time?: string;
-    tags?: string;
-    interest?: string;
-  }) => setOptions(Object.assign({}, options, optionsPatch));
-
-  return [options, update];
-};
-
-const useActiveTabDetails = () => {
-  const [details, set] = useState({ url: "", title: "" });
-
-  useEffect(() => {
-    if (!isExtension) {
-      console.log("You should go to the extension to add pages");
-      return;
-    }
-
-    chrome.tabs.query({ active: true, lastFocusedWindow: true }, (tabs) => {
-      set({
-        url: tabs[0].url || "",
-        title: tabs[0].title || "",
-      });
-    });
-  });
-
-  return details;
-};
-
 const SaveBookmarkMenu: React.FC = () => {
-  const [options, updateOptions] = useBookmarkOptions();
+  const [{ time, interest, tags }, updateOptions] = useBookmarkOptions();
   const handleTags = (tags: string) => updateOptions({ tags });
 
   const { url, title } = useActiveTabDetails();
@@ -150,9 +101,9 @@ const SaveBookmarkMenu: React.FC = () => {
     }
 
     return addPage({
-      interest: options.interest,
-      tags: options.tags.split(", "),
-      time: options.time,
+      interest: interest,
+      tags: tags.split(", "),
+      time: time,
       title,
       url,
       archived: false,
@@ -166,11 +117,11 @@ const SaveBookmarkMenu: React.FC = () => {
         <Wrapper>
           <InputGroup>
             <InterestSelect
-              interest={options.interest}
+              interest={interest}
               onSelect={(interest) => updateOptions({ interest })}
             />
             <TimeSelect
-              time={options.time}
+              time={time}
               onSelect={(time) => updateOptions({ time })}
             />
           </InputGroup>
@@ -178,7 +129,7 @@ const SaveBookmarkMenu: React.FC = () => {
             <TagsArea
               placeholder="Tags"
               onChange={(e) => handleTags(e.target.value)}
-              value={options.tags}
+              value={tags}
             />
             <Button disabled={sendButtonDisabled} onClick={sendBookmark}>
               Send
