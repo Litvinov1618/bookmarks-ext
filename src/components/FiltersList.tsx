@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import FilterItem from "./FilterItem";
+import FilterItem from "./PresentationComponents/FilterItem";
 import useFirestoreTagsCollection from "./Firebase/useFirestoreTagsCollection";
 
 const Wrapper = styled.nav`

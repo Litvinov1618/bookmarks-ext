@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import InterestIcon from "./Icons/InterestIcon";
-import TimeIcon from "./Icons/TimeIcon";
+import InterestIcon from "../Icons/InterestIcon";
+import TimeIcon from "../Icons/TimeIcon";
 
 const mainColor = process.env.REACT_APP_MAIN_COLOR;
 

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import BookmarkItem from "./BookmarkItem";
+import BookmarkItem from "./PresentationComponents/BookmarkItem";
 import { BookmarkDocument } from "../interfaces";
 import { ReactComponent as DoneButton } from "../img/done_button.svg";
 import { ReactComponent as DeleteButton } from "../img/delete_button.svg";

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import TimeIcon from "./Icons/TimeIcon";
-import InterestIcon from "./Icons/InterestIcon";
+import InterestSelect from "./PresentationComponents/InterestSelect";
+import TimeSelect from "./PresentationComponents/TimeSelect";
 import useFirestorePagesCollection from "./Firebase/useFirestorePagesCollection";
 
 const isExtension = process.env.REACT_APP_IS_EXTENSION;
@@ -31,11 +31,6 @@ const Span = styled.span`
 
   display: block;
   margin-bottom: 5px;
-`;
-
-const Label = styled.label`
-  margin: 0 0 3px 4px;
-  display: block;
 `;
 
 const TagsArea = styled.textarea`
@@ -83,42 +78,9 @@ const Button = styled.button`
   }
 `;
 
-const InputWrapper = styled.div`
-  width: 50%;
-  margin-left: -4px;
-`;
-
 const InputGroup = styled.div`
   display: flex;
 `;
-
-interface IconWrapperProps {
-  selected: boolean;
-}
-
-const IconWrapper = styled.button<IconWrapperProps>`
-  display: inline-block;
-  padding: 4px 4px 2px 4px;
-
-  border: 1px solid transparent;
-  border-color: ${(props) => props.selected && mainColor};
-  border-radius: 15px;
-  font: inherit;
-  color: inherit;
-  background-color: transparent;
-  outline: none;
-
-  &:hover {
-    cursor: pointer;
-    border-color: ${mainColor};
-  }
-
-  &:active {
-    transform: translateY(1px);
-    filter: saturate(150%);
-  }
-`;
-
 
 interface BookmarkOptions {
   time: string;
@@ -132,21 +94,27 @@ interface BookmarkOptionsPatch {
   tags?: string;
 }
 
-const useBookmarkOptions = (): [BookmarkOptions, (patch: BookmarkOptionsPatch) => void] => {
+const useBookmarkOptions = (): [
+  BookmarkOptions,
+  (patch: BookmarkOptionsPatch) => void
+] => {
   const [options, setOptions] = useState({
-    time: '',
-    interest: '',
-    tags: ''
+    time: "",
+    interest: "",
+    tags: "",
   });
 
-  const update = (optionsPatch: { time?: string, tags?: string, interest?: string }) =>
-    setOptions(Object.assign({}, options, optionsPatch));
+  const update = (optionsPatch: {
+    time?: string;
+    tags?: string;
+    interest?: string;
+  }) => setOptions(Object.assign({}, options, optionsPatch));
 
   return [options, update];
 };
 
 const useActiveTabDetails = () => {
-  const [details, set] = useState({ url: '', title: '' });
+  const [details, set] = useState({ url: "", title: "" });
 
   useEffect(() => {
     if (!isExtension) {
@@ -154,37 +122,19 @@ const useActiveTabDetails = () => {
       return;
     }
 
-    chrome.tabs.query(
-      { active: true, lastFocusedWindow: true },
-      (tabs) => {
-        set({
-          url: tabs[0].url || '',
-          title: tabs[0].title || ''
-        });
-      }
-    );
+    chrome.tabs.query({ active: true, lastFocusedWindow: true }, (tabs) => {
+      set({
+        url: tabs[0].url || "",
+        title: tabs[0].title || "",
+      });
+    });
   });
 
   return details;
 };
 
-const InterestOption = ({ interest, selected, onSelect }: { interest: string, selected: boolean, onSelect: () => void }) => (
-  <IconWrapper selected={selected} onClick={onSelect}>
-    <InterestIcon status={interest} />
-  </IconWrapper>
-);
-const InterestSelect = ({ interest, onSelect }: { interest: string, onSelect: (interest: string) => void }) => (
-  <InputWrapper>
-    <Label>Interest:</Label>
-    <InterestOption interest="small" selected={interest === 'small'} onSelect={() => onSelect('small')} />
-    <InterestOption interest="medium" selected={interest === 'medium'} onSelect={() => onSelect('medium')} />
-    <InterestOption interest="high" selected={interest === 'high'} onSelect={() => onSelect('high')} />
-  </InputWrapper>
-);
-
 const SaveBookmarkMenu: React.FC = () => {
   const [options, updateOptions] = useBookmarkOptions();
-  const handleTime = (time: string) => updateOptions({ time });
   const handleTags = (tags: string) => updateOptions({ tags });
 
   const { url, title } = useActiveTabDetails();
@@ -215,31 +165,21 @@ const SaveBookmarkMenu: React.FC = () => {
         <Span>Save this page</Span>
         <Wrapper>
           <InputGroup>
-            <InputWrapper>
-              <Label>Read Time:</Label>
-              <IconWrapper
-                selected={options.time === "small"}
-                onClick={() => handleTime("small")}
-              >
-                <TimeIcon status="small" />
-              </IconWrapper>
-              <IconWrapper
-                selected={options.time === "medium"}
-                onClick={() => handleTime("medium")}
-              >
-                <TimeIcon status="medium" />
-              </IconWrapper>
-              <IconWrapper
-                selected={options.time === "high"}
-                onClick={() => handleTime("high")}
-              >
-                <TimeIcon status="high" />
-              </IconWrapper>
-            </InputWrapper>
-            <InterestSelect interest={options.interest} onSelect={interest => updateOptions({ interest })} />
+            <InterestSelect
+              interest={options.interest}
+              onSelect={(interest) => updateOptions({ interest })}
+            />
+            <TimeSelect
+              time={options.time}
+              onSelect={(time) => updateOptions({ time })}
+            />
           </InputGroup>
           <InputGroup>
-            <TagsArea placeholder="Tags" onChange={e => handleTags(e.target.value)} value={options.tags} />
+            <TagsArea
+              placeholder="Tags"
+              onChange={(e) => handleTags(e.target.value)}
+              value={options.tags}
+            />
             <Button disabled={sendButtonDisabled} onClick={sendBookmark}>
               Send
             </Button>

@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import TimeIcon from "./Icons/TimeIcon";
-import InterestIcon from "./Icons/InterestIcon";
-import { BookmarkDocument } from "../interfaces";
+import TimeIcon from "../Icons/TimeIcon";
+import InterestIcon from "../Icons/InterestIcon";
+import { BookmarkDocument } from "../../interfaces";
 
 const Article = styled.article`
   width: 100%;
