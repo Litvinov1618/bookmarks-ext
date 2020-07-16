@@ -3,12 +3,10 @@ import firebase from "./firebase";
 import { BookmarkDocument } from "../../interfaces";
 import useFirestoreTagsCollection from "./useFirestoreTagsCollection";
 
-const useFirestorePagesCollection = (collectionName = "pages", immediate = true) => {
+const useFirestorePagesCollection = (immediate = true) => {
   /** @type {[Array<firebase.firestore.QueryDocumentSnapshot<firebase.firestore.DocumentData>>, React.Dispatch<React.SetStateAction<Array<firebase.firestore.DocumentData>>>]} */
   const [documentPages, setDocumentPages] = useState<any[]>([]);
-  const [collection] = useState(() =>
-    firebase.firestore().collection(collectionName)
-  );
+  const [collection] = useState(() => firebase.firestore().collection("pages"));
   const [query, setQuery] = useState(collection);
   const [ready, setReadyState] = useState(false);
   const { addTag } = useFirestoreTagsCollection(false);
@@ -27,11 +25,11 @@ const useFirestorePagesCollection = (collectionName = "pages", immediate = true)
   }, [query, immediate]);
 
   const addPage = (pageInfo: BookmarkDocument) => {
-    return firebase.firestore()
+    return firebase
+      .firestore()
       .runTransaction(async () => {
-        await collection.add(pageInfo)
-        if (pageInfo.tags.length)
-          await addTag(pageInfo.tags);
+        await collection.add(pageInfo);
+        if (pageInfo.tags.length) await addTag(pageInfo.tags);
       })
       .then(() => console.log("Transaction completed!"))
       .catch((error) => console.log("Transaction failed with error: ", error));

@@ -90,7 +90,7 @@ const SaveBookmarkMenu: React.FC = () => {
 
   const { url, title } = useActiveTabDetails();
 
-  const { addPage } = useFirestorePagesCollection("pages", false);
+  const { addPage } = useFirestorePagesCollection(false);
   const [sendButtonDisabled, setSendButtonDisabled] = useState(false);
   const sendBookmark = () => {
     setSendButtonDisabled(true);

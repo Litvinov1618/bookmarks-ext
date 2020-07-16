@@ -17,7 +17,7 @@ const SavedBookmarks = () => {
     collection,
     archivePage,
     removePage,
-  } = useFirestorePagesCollection("pages");
+  } = useFirestorePagesCollection(true);
 
   const { removeTag } = useFirestoreTagsCollection(false);
   const archivePageAndDeleteTags = (
