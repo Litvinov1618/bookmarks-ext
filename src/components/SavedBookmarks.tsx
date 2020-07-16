@@ -27,9 +27,13 @@ const SavedBookmarks = () => {
     firebase
       .firestore()
       .runTransaction(async () => {
-        await archivePage(pageId, pageInfo).then(() => alert("pageArchived"));
+        await archivePage(pageId, pageInfo).then(() =>
+          console.log("pageArchived")
+        );
         if (pageInfo.tags.join() !== "")
-          await removeTag(pageInfo.tags).then(() => alert("tag removed!"));
+          await removeTag(pageInfo.tags).then(() =>
+            console.log("tag removed!")
+          );
       })
       .then(() => console.log("Transaction completed!"))
       .catch((error) => alert(error));
