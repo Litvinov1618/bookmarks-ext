@@ -96,7 +96,9 @@ const FilterList: React.FC<FilterListProps> = ({ query, collection }) => {
           currentFilter={tagsFilter}
         />
       </Wrapper>
-      <ClearFiltersButton onClick={clearFilters}>Clear</ClearFiltersButton>
+      <ClearFiltersButton onClick={clearFilters}>
+        Clear filters
+      </ClearFiltersButton>
     </>
   );
 };

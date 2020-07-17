@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import BookmarkItem from "./PresentationComponents/BookmarkItem";
 import { BookmarkDocument } from "../interfaces";
@@ -33,51 +33,36 @@ interface BookmarkListProps {
   documentPages: { data: () => BookmarkDocument; id: string }[];
   archivePage: (pageId: string, pageInfo: BookmarkDocument) => void;
   removePage: (pageId: string) => void;
+  switchPages: () => void;
+  archivedPagesMode: Boolean;
 }
 
 const BookmarkList: React.FC<BookmarkListProps> = ({
   documentPages,
   archivePage,
   removePage,
+  switchPages,
+  archivedPagesMode,
 }) => {
-  const activePages: { data: () => BookmarkDocument; id: string }[] = [];
-  const archivedPages: { data: () => BookmarkDocument; id: string }[] = [];
-  documentPages.forEach((document) => {
-    if (document.data().archived === false) activePages.push(document);
-    else archivedPages.push(document);
-  });
-
-  const [showArchivedPages, setShowArchivedPages] = useState(false);
   const handleClick = () => {
-    if (showArchivedPages) setShowArchivedPages(false);
-    else setShowArchivedPages(true);
+    switchPages();
   };
 
   return (
     <>
       <Wrapper>
-        {activePages.map((page) => (
+        {documentPages.map((page) => (
           <BookmarkItem
             pageInfo={page.data()}
             key={page.id}
             pageId={page.id}
-            close={archivePage}
-            closeButtonIcon={DoneButton}
+            close={archivedPagesMode ? removePage : archivePage}
+            closeButtonIcon={archivedPagesMode ? DeleteButton : DoneButton}
           />
         ))}
         <ArchivedPagesButton onClick={handleClick}>
           Archived pages
         </ArchivedPagesButton>
-        {showArchivedPages &&
-          archivedPages.map((page) => (
-            <BookmarkItem
-              pageInfo={page.data()}
-              key={page.id}
-              pageId={page.id}
-              close={removePage}
-              closeButtonIcon={DeleteButton}
-            />
-          ))}
       </Wrapper>
     </>
   );

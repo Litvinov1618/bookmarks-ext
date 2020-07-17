@@ -17,9 +17,12 @@ const SavedBookmarks = () => {
     collection,
     archivePage,
     removePage,
+    switchPages,
+    archivedPagesMode,
   } = useFirestorePagesCollection(true);
 
   const { removeTag } = useFirestoreTagsCollection(false);
+
   const archivePageAndDeleteTags = (
     pageId: string,
     pageInfo: BookmarkDocument
@@ -48,6 +51,8 @@ const SavedBookmarks = () => {
         documentPages={documentPages}
         archivePage={archivePageAndDeleteTags}
         removePage={removePage}
+        switchPages={switchPages}
+        archivedPagesMode={archivedPagesMode}
       />
     </>
   );

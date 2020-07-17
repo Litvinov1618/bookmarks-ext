@@ -7,9 +7,13 @@ const useFirestorePagesCollection = (immediate = true) => {
   /** @type {[Array<firebase.firestore.QueryDocumentSnapshot<firebase.firestore.DocumentData>>, React.Dispatch<React.SetStateAction<Array<firebase.firestore.DocumentData>>>]} */
   const [documentPages, setDocumentPages] = useState<any[]>([]);
   const [collection] = useState(() => firebase.firestore().collection("pages"));
-  const [query, setQuery] = useState(collection);
+  const [currentPages, setCurrentPages] = useState(() =>
+    collection.where("archived", "==", false)
+  );
+  const [query, setQuery] = useState(currentPages);
   const [ready, setReadyState] = useState(false);
-  const { addTag } = useFirestoreTagsCollection(false);
+  const [archivedPagesMode, setArchivedPagesMode] = useState(false);
+  const { addTag, removeTag } = useFirestoreTagsCollection(false);
 
   useEffect(() => {
     if (immediate)
@@ -23,6 +27,16 @@ const useFirestorePagesCollection = (immediate = true) => {
         }
       );
   }, [query, immediate]);
+
+  const switchPages = () => {
+    if (archivedPagesMode) {
+      setArchivedPagesMode(false);
+      setCurrentPages(collection.where("archived", "==", false));
+    } else {
+      setArchivedPagesMode(true);
+      setCurrentPages(collection.where("archived", "==", true));
+    }
+  };
 
   const addPage = (pageInfo: BookmarkDocument) => {
     return firebase
@@ -54,12 +68,14 @@ const useFirestorePagesCollection = (immediate = true) => {
 
   return {
     documentPages,
-    collection,
+    collection: currentPages,
     ready,
     query: setQuery,
     addPage,
     removePage,
     archivePage,
+    switchPages,
+    archivedPagesMode,
   };
 };
 
