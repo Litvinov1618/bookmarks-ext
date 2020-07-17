@@ -58,12 +58,24 @@ const useFirestorePagesCollection = (immediate = true) => {
   };
 
   const archivePage = (pageId: string, pageInfo: BookmarkDocument) => {
-    pageInfo.archived = true;
-    return collection
-      .doc(pageId)
-      .update(pageInfo)
+    return firebase
+      .firestore()
+      .runTransaction(async () => {
+        pageInfo.archived = true;
+        await collection
+          .doc(pageId)
+          .update(pageInfo)
+          .then(() => console.log("Transaction completed!"))
+          .catch((error) =>
+            console.log("Transaction failed with error: ", error)
+          );
+        if (pageInfo.tags.join() !== "")
+          await removeTag(pageInfo.tags).then(() =>
+            console.log("tag removed!")
+          );
+      })
       .then(() => console.log("Transaction completed!"))
-      .catch((error) => console.log("Transaction failed with error: ", error));
+      .catch((error) => alert(error));
   };
 
   return {

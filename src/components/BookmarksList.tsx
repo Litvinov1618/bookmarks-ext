@@ -44,10 +44,6 @@ const BookmarkList: React.FC<BookmarkListProps> = ({
   switchPages,
   archivedPagesMode,
 }) => {
-  const handleClick = () => {
-    switchPages();
-  };
-
   return (
     <>
       <Wrapper>
@@ -60,7 +56,7 @@ const BookmarkList: React.FC<BookmarkListProps> = ({
             closeButtonIcon={archivedPagesMode ? DeleteButton : DoneButton}
           />
         ))}
-        <ArchivedPagesButton onClick={handleClick}>
+        <ArchivedPagesButton onClick={switchPages}>
           Archived pages
         </ArchivedPagesButton>
       </Wrapper>

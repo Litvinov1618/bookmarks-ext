@@ -2,10 +2,7 @@ import React from "react";
 import FilterList from "./FiltersList";
 import BookmarkList from "./BookmarksList";
 import useFirestorePagesCollection from "./Firebase/useFirestorePagesCollection";
-import useFirestoreTagsCollection from "./Firebase/useFirestoreTagsCollection";
 import LoadingIcon from "./Icons/LoadingIcon";
-import { BookmarkDocument } from "../interfaces";
-import firebase from "./Firebase/firebase";
 
 const mainColor = process.env.REACT_APP_MAIN_COLOR;
 
@@ -21,27 +18,6 @@ const SavedBookmarks = () => {
     archivedPagesMode,
   } = useFirestorePagesCollection(true);
 
-  const { removeTag } = useFirestoreTagsCollection(false);
-
-  const archivePageAndDeleteTags = (
-    pageId: string,
-    pageInfo: BookmarkDocument
-  ) => {
-    firebase
-      .firestore()
-      .runTransaction(async () => {
-        await archivePage(pageId, pageInfo).then(() =>
-          console.log("pageArchived")
-        );
-        if (pageInfo.tags.join() !== "")
-          await removeTag(pageInfo.tags).then(() =>
-            console.log("tag removed!")
-          );
-      })
-      .then(() => console.log("Transaction completed!"))
-      .catch((error) => alert(error));
-  };
-
   if (!ready) return <LoadingIcon speed={1} color={mainColor} />;
 
   return (
@@ -49,8 +25,8 @@ const SavedBookmarks = () => {
       <FilterList query={query} collection={collection} />
       <BookmarkList
         documentPages={documentPages}
-        archivePage={archivePageAndDeleteTags}
         removePage={removePage}
+        archivePage={archivePage}
         switchPages={switchPages}
         archivedPagesMode={archivedPagesMode}
       />
